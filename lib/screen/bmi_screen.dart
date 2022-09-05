@@ -230,7 +230,6 @@ class _BmiScreenState extends State<BmiScreen> {
           const SizedBox(
             height: pPadding,
           ),
-          // ignore: sized_box_for_whitespace
           Container(
             width: double.infinity,
             height: 60,
