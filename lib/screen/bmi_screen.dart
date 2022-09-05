@@ -35,7 +35,7 @@ class _BmiScreenState extends State<BmiScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: sColor,
-                        borderRadius: BorderRadius.circular(pSizeBorder),
+                        borderRadius: BorderRadius.circular(pBorderSize),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +43,7 @@ class _BmiScreenState extends State<BmiScreen> {
                         children: [
                           const Icon(
                             Icons.female,
-                            size: pSizeIcon,
+                            size: pIconSize,
                             color: Colors.white,
                           ),
                           const SizedBox(height: pBoxSize),
@@ -61,7 +61,7 @@ class _BmiScreenState extends State<BmiScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: sColor,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(pBorderSize),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +69,7 @@ class _BmiScreenState extends State<BmiScreen> {
                         children: [
                           const Icon(
                             Icons.male,
-                            size: pSizeIcon,
+                            size: pIconSize,
                             color: Colors.white,
                           ),
                           const SizedBox(height: pBoxSize),
@@ -92,7 +92,7 @@ class _BmiScreenState extends State<BmiScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   color: sColor,
-                  borderRadius: BorderRadius.circular(pSizeBorder),
+                  borderRadius: BorderRadius.circular(pBorderSize),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -117,8 +117,8 @@ class _BmiScreenState extends State<BmiScreen> {
                     Slider(
                       max: 300,
                       min: 30,
-                      activeColor: pColorButton,
-                      inactiveColor: Colors.grey[400],
+                      activeColor: gColor,
+                      inactiveColor: gSliderColor,
                       label: valueSlider.round().toString(),
                       value: valueSlider.toDouble(),
                       onChanged: (double value) {
@@ -144,14 +144,14 @@ class _BmiScreenState extends State<BmiScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: sColor,
-                        borderRadius: BorderRadius.circular(pSizeBorder),
+                        borderRadius: BorderRadius.circular(pBorderSize),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
                             'Age',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: pMediumFontSize),
                           ),
                           const Text(
                             '188',
@@ -164,14 +164,14 @@ class _BmiScreenState extends State<BmiScreen> {
                               FloatingActionButton(
                                 onPressed: () {},
                                 mini: true,
-                                backgroundColor: pColorButton,
+                                backgroundColor: gColor,
                                 child: const Icon(Icons.remove),
                               ),
                               const SizedBox(width: pBoxSize),
                               FloatingActionButton(
                                 onPressed: () {},
                                 mini: true,
-                                backgroundColor: pColorButton,
+                                backgroundColor: gColor,
                                 child: const Icon(Icons.add),
                               ),
                             ],
@@ -187,14 +187,14 @@ class _BmiScreenState extends State<BmiScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: sColor,
-                        borderRadius: BorderRadius.circular(pSizeBorder),
+                        borderRadius: BorderRadius.circular(pBorderSize),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
                             'Age',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: pMediumFontSize),
                           ),
                           const Text(
                             '188',
@@ -207,14 +207,14 @@ class _BmiScreenState extends State<BmiScreen> {
                               FloatingActionButton(
                                 onPressed: () {},
                                 mini: true,
-                                backgroundColor: pColorButton,
+                                backgroundColor: gColor,
                                 child: const Icon(Icons.remove),
                               ),
                               const SizedBox(width: pBoxSize),
                               FloatingActionButton(
                                 onPressed: () {},
                                 mini: true,
-                                backgroundColor: pColorButton,
+                                backgroundColor: gColor,
                                 child: const Icon(Icons.add),
                               ),
                             ],
