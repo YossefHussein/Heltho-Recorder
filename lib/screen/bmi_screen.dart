@@ -193,7 +193,7 @@ class _BmiScreenState extends State<BmiScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            'Age',
+                            'AGE',
                             style: TextStyle(fontSize: pMediumFontSize),
                           ),
                           const Text(
