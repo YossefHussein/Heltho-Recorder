@@ -232,7 +232,7 @@ class _BmiScreenState extends State<BmiScreen> {
           ),
           Container(
             width: double.infinity,
-            height: 60,
+            height: 50,
             child: MaterialButton(
               color: Colors.red,
               child: const Center(
