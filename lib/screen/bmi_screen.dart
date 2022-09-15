@@ -1,31 +1,38 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
+import 'result_screen.dart';
 
 class BmiScreen extends StatefulWidget {
   const BmiScreen({Key? key}) : super(key: key);
 
   @override
-  State<BmiScreen> createState() => _BmiScreenState();
+  State<BmiScreen> createState() => _BmiScreen();
 }
 
-class _BmiScreenState extends State<BmiScreen> {
-  var valueSlider = 150;
-
+class _BmiScreen extends State<BmiScreen> {
+  /* this value to use in slider
+  And I use this in selected height of user */
+  // This value to use in selected what is gender of user
+  bool isMale = false;
+  // Value of height
+  var heightValue = 150;
+  // Value of weight
+  int weightValue = 70;
+  // Value of age
+  int ageValue = 20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: pColor,
       appBar: AppBar(
         title: const Text('BMI'),
-        centerTitle: true,
-        elevation: 0.0,
-        backgroundColor: pColor,
       ),
       body: SafeArea(
         child: Column(
           children: [
-            /// Selected your gender male or female
+            /// Selected gender of user male or female
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(pPadding),
@@ -33,25 +40,30 @@ class _BmiScreenState extends State<BmiScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: sColor,
-                          borderRadius: BorderRadius.circular(pBorderSize),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            const Icon(
-                              Icons.female,
-                              size: pIconSize,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(height: pBoxSize),
-                            const Text(
-                              'Woman',
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () => setState(() {
+                          isMale = true;
+                        }),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: isMale ? gColor : sColor,
+                            borderRadius: BorderRadius.circular(pBorderSize),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Icon(
+                                Icons.female,
+                                size: pIconSize,
+                                color: pColorIcon,
+                              ),
+                              const SizedBox(height: pBoxSize),
+                              const Text(
+                                'Woman',
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -59,25 +71,30 @@ class _BmiScreenState extends State<BmiScreen> {
                       width: pPadding,
                     ),
                     Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: sColor,
-                          borderRadius: BorderRadius.circular(pBorderSize),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            const Icon(
-                              Icons.male,
-                              size: pIconSize,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(height: pBoxSize),
-                            const Text(
-                              'Man',
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () => setState(() {
+                          isMale = false;
+                        }),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: !isMale ? gColor : sColor,
+                            borderRadius: BorderRadius.circular(pBorderSize),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Icon(
+                                Icons.male,
+                                size: pIconSize,
+                                color: pColorIcon,
+                              ),
+                              const SizedBox(height: pBoxSize),
+                              const Text(
+                                'Man',
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -86,9 +103,13 @@ class _BmiScreenState extends State<BmiScreen> {
               ),
             ),
 
-            /// Selected your height
+            /// Selected height of user
             Expanded(
               child: Padding(
+                // note here I not use (EdgeInsets.all) because when use
+                // (EdgeInsets.all) will adding padding of Selected gender part
+                // to select Selected your height part
+                // when do this padding will be 40 not 20
                 padding: const EdgeInsets.symmetric(horizontal: pPadding),
                 child: Container(
                   decoration: BoxDecoration(
@@ -107,7 +128,7 @@ class _BmiScreenState extends State<BmiScreen> {
                         textBaseline: TextBaseline.alphabetic,
                         children: [
                           Text(
-                            '$valueSlider',
+                            '$heightValue',
                             style: const TextStyle(
                               fontSize: pLargeFontSize,
                             ),
@@ -119,12 +140,12 @@ class _BmiScreenState extends State<BmiScreen> {
                         max: 300,
                         min: 30,
                         activeColor: gColor,
-                        inactiveColor: gSliderColor,
-                        label: valueSlider.round().toString(),
-                        value: valueSlider.toDouble(),
+                        inactiveColor: gSliderInactiveColor,
+                        label: heightValue.round().toString(),
+                        value: heightValue.toDouble(),
                         onChanged: (double value) {
                           setState(() {
-                            valueSlider = value.toInt();
+                            heightValue = value.toInt();
                           });
                         },
                       ),
@@ -141,6 +162,7 @@ class _BmiScreenState extends State<BmiScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: pPadding),
                 child: Row(
                   children: [
+                    /// Selected age of user
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
@@ -154,23 +176,33 @@ class _BmiScreenState extends State<BmiScreen> {
                               'Age',
                               style: TextStyle(fontSize: pMediumFontSize),
                             ),
-                            const Text(
-                              '188',
-                              style: TextStyle(fontSize: pLargeFontSize),
+                            Text(
+                              '$ageValue',
+                              style: const TextStyle(fontSize: pLargeFontSize),
                             ),
                             const SizedBox(height: pBoxSize),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 FloatingActionButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      ageValue--;
+                                    });
+                                  },
+                                  heroTag: 'ageValue--',
                                   mini: true,
                                   backgroundColor: gColor,
                                   child: const Icon(Icons.remove),
                                 ),
                                 const SizedBox(width: pBoxSize),
                                 FloatingActionButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      ageValue++;
+                                    });
+                                  },
+                                  heroTag: 'ageValue++',
                                   mini: true,
                                   backgroundColor: gColor,
                                   child: const Icon(Icons.add),
@@ -184,6 +216,8 @@ class _BmiScreenState extends State<BmiScreen> {
                     const SizedBox(
                       width: pPadding,
                     ),
+
+                    /// Selected weight of user
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
@@ -194,26 +228,36 @@ class _BmiScreenState extends State<BmiScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              'AGE',
+                              'Weight',
                               style: TextStyle(fontSize: pMediumFontSize),
                             ),
-                            const Text(
-                              '188',
-                              style: TextStyle(fontSize: pLargeFontSize),
+                            Text(
+                              '$weightValue',
+                              style: const TextStyle(fontSize: pLargeFontSize),
                             ),
                             const SizedBox(height: pBoxSize),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 FloatingActionButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      weightValue--;
+                                    });
+                                  },
+                                  heroTag: 'weightValue--',
                                   mini: true,
                                   backgroundColor: gColor,
                                   child: const Icon(Icons.remove),
                                 ),
                                 const SizedBox(width: pBoxSize),
                                 FloatingActionButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      weightValue++;
+                                    });
+                                  },
+                                  heroTag: 'weightValue++',
                                   mini: true,
                                   backgroundColor: gColor,
                                   child: const Icon(Icons.add),
@@ -231,6 +275,8 @@ class _BmiScreenState extends State<BmiScreen> {
             const SizedBox(
               height: pPadding,
             ),
+
+            /// To give my BMI
             Container(
               width: double.infinity,
               height: 50,
@@ -242,7 +288,23 @@ class _BmiScreenState extends State<BmiScreen> {
                     style: TextStyle(color: pColorText),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  double result = weightValue / pow(heightValue / 100, 2);
+                  // Go to next screen (ResultScreen)
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      // Passing this data (ResultScreen)
+                      builder: (context) => ResultScreen(
+                        age: ageValue,
+                        height: heightValue,
+                        gender: isMale,
+                        weight: weightValue,
+                        result: result,
+                      ),
+                    ),
+                  );
+                },
               ),
             )
           ],
