@@ -1,18 +1,20 @@
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/material.dart';
-import 'screen/bmi_screen.dart';
 import 'package:bmi_test/theme.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'screen/bmi_screen.dart';
 
 main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    TextTheme themeText = Theme.of(context).textTheme.apply(
-          bodyColor: pColorText,
-          displayColor: pColorText,
-        );
+    TextTheme themeText = GoogleFonts.pangolinTextTheme().apply(
+      bodyColor: pColorText,
+      displayColor: pColorText,
+    );
     return MaterialApp(
       /// Theme of app
       theme: ThemeData(
