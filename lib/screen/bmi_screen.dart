@@ -137,7 +137,7 @@ class _BmiScreen extends State<BmiScreen> {
                         ],
                       ),
                       Slider(
-                        max: 300,
+                        max: 250,
                         min: 30,
                         activeColor: gColor,
                         inactiveColor: gSliderInactiveColor,
