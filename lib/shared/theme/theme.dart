@@ -6,13 +6,14 @@ import 'package:flutter/material.dart';
 
 /// p from primary.
 /// s from secondary
-const pColor = Color(0xFF0E0823);
-const sColor = Color(0xFF1B1238);
+/// g from General
+const pColor = Color(0XFF0A0E21);
+const sColor = Color(0xFF1A1F38);
 const pColorText = Color(0xFFFFFFFF);
 const pColorIcon = Color(0xFFFFFFFF);
 
-/// General color
-const gColor = Color(0xFF432C8E); // G from General
+/// general color
+const gColorInactiveColor = Color(0xFF432C8E);
 const gSliderInactiveColor = Color(0xFFBDBDBD);
 const gColorButton = Color(0xFFF44336);
 

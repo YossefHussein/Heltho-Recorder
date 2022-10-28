@@ -1,0 +1,13 @@
+{
+    "woman" : "امرأة",
+    "man" :"رجل",
+    "height" : "طول",
+    "age" : "عمر",
+    "weight" : "وزن",
+    "calculate" : "أحسب",
+    "yourGender" : "جنسك",
+    "yourHeight" : "طولك",
+    "yourWeight" : "وزنك",
+    "yourAge" : "عمرك",
+    "bmiResult" : "(BMI) نتيجتك"
+}

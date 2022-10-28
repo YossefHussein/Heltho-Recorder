@@ -1,0 +1,13 @@
+{
+    "woman" : "femme",
+    "man" :"homme ",
+    "height" : "long ",
+    "age" : "âge",
+    "weight" : "poids",
+    "calculate" : "calculer",
+    "yourGender" : "votre sexe",
+    "yourHeight" : "votre taille",
+    "yourWeight" : "poids",
+    "yourAge" : "âge",
+    "bmiResult" : "(BMI) ton score"
+}

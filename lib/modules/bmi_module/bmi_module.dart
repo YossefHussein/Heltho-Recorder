@@ -1,19 +1,22 @@
 import 'dart:math';
+import 'package:bmi_test/shared/widget/appbar_method/appBar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../shared/theme/theme.dart';
+import '../../translations/locale_keys.dart';
+import '../result_module/result_module.dart';
 
-import '../theme.dart';
-import 'result_screen.dart';
-
-class BmiScreen extends StatefulWidget {
-  const BmiScreen({Key? key}) : super(key: key);
+class BmiModule extends StatefulWidget {
+  const BmiModule({Key? key}) : super(key: key);
 
   @override
-  State<BmiScreen> createState() => _BmiScreen();
+  State<BmiModule> createState() => _BmiModule();
 }
 
-class _BmiScreen extends State<BmiScreen> {
+class _BmiModule extends State<BmiModule> {
   /* this value to use in slider
   And I use this in selected height of user */
+
   // This value to use in selected what is gender of user
   bool isMale = false;
   // Value of height
@@ -22,13 +25,18 @@ class _BmiScreen extends State<BmiScreen> {
   int weightValue = 70;
   // Value of age
   int ageValue = 20;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: pColor,
-      appBar: AppBar(
-        title: const Text('BMI'),
-      ),
+      appBar: appBarMethod(),
       body: SafeArea(
         child: Column(
           children: [
@@ -46,12 +54,11 @@ class _BmiScreen extends State<BmiScreen> {
                         }),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: isMale ? gColor : sColor,
+                            color: isMale ? pColor : sColor,
                             borderRadius: BorderRadius.circular(pBorderSize),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            // ignore: prefer_const_literals_to_create_immutables
                             children: [
                               const Icon(
                                 Icons.female,
@@ -59,9 +66,7 @@ class _BmiScreen extends State<BmiScreen> {
                                 color: pColorIcon,
                               ),
                               const SizedBox(height: pBoxSize),
-                              const Text(
-                                'Woman',
-                              ),
+                              Text(LocaleKeys.woman.tr()),
                             ],
                           ),
                         ),
@@ -77,12 +82,11 @@ class _BmiScreen extends State<BmiScreen> {
                         }),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: !isMale ? gColor : sColor,
+                            color: isMale ? pColor : sColor,
                             borderRadius: BorderRadius.circular(pBorderSize),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            // ignore: prefer_const_literals_to_create_immutables
                             children: [
                               const Icon(
                                 Icons.male,
@@ -90,9 +94,7 @@ class _BmiScreen extends State<BmiScreen> {
                                 color: pColorIcon,
                               ),
                               const SizedBox(height: pBoxSize),
-                              const Text(
-                                'Man',
-                              ),
+                              Text(LocaleKeys.man.tr()),
                             ],
                           ),
                         ),
@@ -119,8 +121,8 @@ class _BmiScreen extends State<BmiScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Height',
+                      Text(
+                        LocaleKeys.height.tr(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +141,7 @@ class _BmiScreen extends State<BmiScreen> {
                       Slider(
                         max: 250,
                         min: 30,
-                        activeColor: gColor,
+                        activeColor: pColor,
                         inactiveColor: gSliderInactiveColor,
                         label: heightValue.round().toString(),
                         value: heightValue.toDouble(),
@@ -172,9 +174,9 @@ class _BmiScreen extends State<BmiScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              'Age',
-                              style: TextStyle(fontSize: pMediumFontSize),
+                            Text(
+                              LocaleKeys.age.tr(),
+                              style: const TextStyle(fontSize: pMediumFontSize),
                             ),
                             Text(
                               '$ageValue',
@@ -192,7 +194,7 @@ class _BmiScreen extends State<BmiScreen> {
                                   },
                                   heroTag: 'ageValue--',
                                   mini: true,
-                                  backgroundColor: gColor,
+                                  backgroundColor: pColor,
                                   child: const Icon(Icons.remove),
                                 ),
                                 const SizedBox(width: pBoxSize),
@@ -204,7 +206,7 @@ class _BmiScreen extends State<BmiScreen> {
                                   },
                                   heroTag: 'ageValue++',
                                   mini: true,
-                                  backgroundColor: gColor,
+                                  backgroundColor: pColor,
                                   child: const Icon(Icons.add),
                                 ),
                               ],
@@ -227,9 +229,9 @@ class _BmiScreen extends State<BmiScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              'Weight',
-                              style: TextStyle(fontSize: pMediumFontSize),
+                            Text(
+                              LocaleKeys.weight.tr(),
+                              style: const TextStyle(fontSize: pMediumFontSize),
                             ),
                             Text(
                               '$weightValue',
@@ -247,7 +249,7 @@ class _BmiScreen extends State<BmiScreen> {
                                   },
                                   heroTag: 'weightValue--',
                                   mini: true,
-                                  backgroundColor: gColor,
+                                  backgroundColor: pColor,
                                   child: const Icon(Icons.remove),
                                 ),
                                 const SizedBox(width: pBoxSize),
@@ -259,7 +261,7 @@ class _BmiScreen extends State<BmiScreen> {
                                   },
                                   heroTag: 'weightValue++',
                                   mini: true,
-                                  backgroundColor: gColor,
+                                  backgroundColor: pColor,
                                   child: const Icon(Icons.add),
                                 ),
                               ],
@@ -282,10 +284,10 @@ class _BmiScreen extends State<BmiScreen> {
               height: 50,
               child: MaterialButton(
                 color: Colors.red,
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'Calculate',
-                    style: TextStyle(color: pColorText),
+                    LocaleKeys.calculate.tr(),
+                    style: const TextStyle(color: pColorText),
                   ),
                 ),
                 onPressed: () {
@@ -306,7 +308,7 @@ class _BmiScreen extends State<BmiScreen> {
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
