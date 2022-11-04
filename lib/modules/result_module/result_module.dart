@@ -18,7 +18,7 @@ class ResultScreen extends StatelessWidget {
   // your BMI result
   final double result;
 
-  const ResultScreen({
+  ResultScreen({
     Key? key,
     this.gender,
     required this.height,
@@ -30,7 +30,6 @@ class ResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: pColor,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -39,12 +38,12 @@ class ResultScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: const Text('BMI Result'),
+        title: Text('BMI Result'),
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(pPadding),
+            padding: EdgeInsets.all(pPadding),
             child: Column(
               children: [
                 Column(
@@ -54,27 +53,27 @@ class ResultScreen extends StatelessWidget {
                   children: [
                     Text(
                       '${LocaleKeys.yourGender.tr()} : ${gender == false ? LocaleKeys.man.tr() : LocaleKeys.woman.tr()}',
-                      style: const TextStyle(fontSize: pMediumFontSize),
+                      style: TextStyle(fontSize: pMediumFontSize),
                     ),
                     Text(
                       '${LocaleKeys.yourHeight.tr()} : $height',
-                      style: const TextStyle(fontSize: pMediumFontSize),
+                      style: TextStyle(fontSize: pMediumFontSize),
                     ),
                     Text(
                       '${LocaleKeys.yourWeight.tr()} : $weight',
-                      style: const TextStyle(fontSize: pMediumFontSize),
+                      style: TextStyle(fontSize: pMediumFontSize),
                     ),
                     Text(
                       '${LocaleKeys.yourAge.tr()} : $age',
-                      style: const TextStyle(fontSize: pMediumFontSize),
+                      style: TextStyle(fontSize: pMediumFontSize),
                     ),
                     Text(
                       '${LocaleKeys.bmiResult.tr()} : ${result.round()}',
-                      style: const TextStyle(fontSize: pMediumFontSize),
+                      style: TextStyle(fontSize: pMediumFontSize),
                     ),
                   ],
                 ),
-                const SizedBox(
+                SizedBox(
                   height: pBoxSize,
                 ),
                 Image.network(
