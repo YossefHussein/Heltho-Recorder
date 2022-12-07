@@ -31,11 +31,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   easy_localization: ^3.0.1
-  flutter_bloc: ^8.1.1
-  bloc: ^8.1.0
   google_fonts: ^3.0.1
-  shared_preferences: ^2.0.15
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,10 +71,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Pangolin
-      fonts:
-        - asset: assets/fonts/Pangolin-Regular.ttf
+  # fonts:
+  #   - family: Pangolin
+  #     fonts:
+  #       - asset: assets/fonts/Pangolin-Regular.ttf
         # - asset: fonts/Schyler-Italic.ttf
           # style: italic
   #   - family: Trajan Pro
