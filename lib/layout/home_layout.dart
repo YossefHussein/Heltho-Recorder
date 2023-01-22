@@ -1,3 +1,4 @@
+import 'package:bmi_test/modules/bmi_module/bmi_module.dart';
 import 'package:flutter/material.dart';
 import '../shared/widget/appbar/appBar.dart';
 
@@ -7,7 +8,11 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: HomeLayout(),
+      appBar: appBarWidget(
+        title: 'BMI',
+        isLeading: false,
+      ),
+      body: const BmiModule(),
     );
   }
 }

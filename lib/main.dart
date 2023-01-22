@@ -1,13 +1,12 @@
 import 'package:bmi_test/layout/home_layout.dart';
-import 'package:bmi_test/modules/bmi_module/bmi_module.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'shared/theme/theme.dart';
-import 'translations/codegen_loader.g.dart';
+import 'shared/translations/codegen_loader.g.dart';
 
 Future<void> main() async {
-  // you should yous this function with adding async to main
+  // you should use this with adding async to main
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   runApp(
@@ -21,7 +20,7 @@ Future<void> main() async {
       ],
       fallbackLocale: const Locale('ar'),
       assetLoader: const CodegenLoader(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -31,24 +30,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return MaterialApp(
       // theme of app
       theme: ThemeData(
         scaffoldBackgroundColor: pColor,
         // add main colors to app
-        colorScheme: ColorScheme.fromSwatch().copyWith(),
-        // main theme to text
-        textTheme: GoogleFonts.pangolinTextTheme(textTheme).apply(
-          bodyColor: Colors.white,
-          displayColor: Colors.white,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: pColor,
+          secondary: sColor
         ),
-        // main theme to buttons
-        buttonTheme: ButtonThemeData(
-          buttonColor: Colors.white,
+        // main theme to text
+        textTheme: GoogleFonts.cairoTextTheme().apply(
+          bodyColor: pColorText,
+          displayColor: pColorText,
         ),
         iconTheme: IconThemeData(
-          color: Colors.white,
+          color: pColorIcon,
         ),
         useMaterial3: true,
       ),
@@ -57,7 +54,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: BmiModule(),
+      home: const HomeLayout(),
     );
   }
 }

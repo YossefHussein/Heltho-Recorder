@@ -1,24 +1,25 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../shared/theme/theme.dart';
+import '../../shared/translations/locale_keys.dart';
 import '../../shared/widget/appbar/appBar.dart';
-import '../../translations/locale_keys.dart';
 
+// ignore: must_be_immutable
 class ResultModule extends StatelessWidget {
   bool yourGender = true;
-  int heightValue;
-  int weightValue;
-  int ageValue;
-  double result;
+  int? heightValue;
+  int? weightValue;
+  int? ageValue;
+  double? result;
 
   ResultModule({
-    Key? key,
-    required this.yourGender,
-    required this.weightValue,
-    required this.heightValue,
-    required this.ageValue,
-    required this.result,
-  }) : super(key: key);
+    super.key,
+     required this.yourGender,
+     this.weightValue,
+     this.heightValue,
+     this.ageValue,
+     this.result,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +56,14 @@ class ResultModule extends StatelessWidget {
                       '${LocaleKeys.yourAge.tr()} : $ageValue',
                     ),
                     Text(
-                      '${LocaleKeys.bmiResult.tr()} : ${result.round()}',
+                      '${LocaleKeys.bmiResult.tr()} : ${result?.round()}',
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: pSizeBox,
                 ),
-                Image.network(
-                    'https://upload.wikimedia.org/wikipedia/commons/6/6d/Body_Mass_Index.jpg?20210712122410')
+                Image(image: AssetImage("assets/images/body_mass_index.jpg"),),
               ],
             ),
           ),

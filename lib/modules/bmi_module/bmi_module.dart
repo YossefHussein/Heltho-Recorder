@@ -1,11 +1,10 @@
 import 'dart:math';
-
+import 'package:bmi_test/modules/result_module/result_module.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../shared/theme/theme.dart';
-import '../../shared/widget/appbar/appBar.dart';
-import '../../translations/locale_keys.dart';
-import '../result_module/result_module.dart';
+import '../../shared/translations/locale_keys.dart';
+
 
 class BmiModule extends StatefulWidget {
   const BmiModule({Key? key}) : super(key: key);
@@ -30,10 +29,6 @@ class _BmiModuleState extends State<BmiModule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWidget(
-        title: 'BMI',
-        isLeading: false,
-      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -53,7 +48,7 @@ class _BmiModuleState extends State<BmiModule> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: isMale == false ? sColor : pColorButton,
+                            color: isMale == false ? pColorButton : sColor,
                             borderRadius: BorderRadius.circular(pBorderSize),
                           ),
                           child: Column(
@@ -64,7 +59,7 @@ class _BmiModuleState extends State<BmiModule> {
                                 size: pIconSize,
                               ),
                               const SizedBox(height: pSizeBox),
-                              Text(LocaleKeys.woman.tr()),
+                              Text(LocaleKeys.woman.tr().toUpperCase()),
                             ],
                           ),
                         ),
@@ -82,18 +77,18 @@ class _BmiModuleState extends State<BmiModule> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: isMale == true ? pColor : pColorButton,
+                            color: isMale == true ? pColorButton : sColor,
                             borderRadius: BorderRadius.circular(pBorderSize),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Icon(
-                                Icons.female,
+                                Icons.male,
                                 size: pIconSize,
                               ),
                               const SizedBox(height: pSizeBox),
-                              Text(LocaleKeys.man.tr()),
+                              Text(LocaleKeys.man.tr().toUpperCase()),
                             ],
                           ),
                         ),
@@ -121,10 +116,8 @@ class _BmiModuleState extends State<BmiModule> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FittedBox(
-                        child: Text(
-                          LocaleKeys.height.tr(),
-                        ),
+                      Text(
+                        LocaleKeys.height.tr().toUpperCase(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +127,7 @@ class _BmiModuleState extends State<BmiModule> {
                           Text(
                             '$heightValue',
                             style: const TextStyle(
-                              fontSize: pBorderSize,
+                              fontSize: pLargeFontSize,
                               fontWeight: FontWeight.w900,
                             ),
                           ),
@@ -143,7 +136,8 @@ class _BmiModuleState extends State<BmiModule> {
                       ),
                       Slider(
                         value: heightValue.toDouble(),
-                        max: 350,
+                        max: 215,
+                        min: 130,
                         inactiveColor: pColor,
                         activeColor: pColorSliderInactive,
                         label: heightValue.round().toString(),
@@ -177,7 +171,7 @@ class _BmiModuleState extends State<BmiModule> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              LocaleKeys.age.tr(),
+                              LocaleKeys.age.tr().toUpperCase(),
                               style: const TextStyle(fontSize: pMediumFontSize),
                             ),
                             Text(
@@ -194,7 +188,7 @@ class _BmiModuleState extends State<BmiModule> {
                                       ageValue--;
                                     });
                                   },
-                                  heroTag: 'ageValue--',
+                                  heroTag: 'ageValue less',
                                   mini: true,
                                   backgroundColor: pColor,
                                   child: const Icon(Icons.remove),
@@ -206,7 +200,7 @@ class _BmiModuleState extends State<BmiModule> {
                                       ageValue++;
                                     });
                                   },
-                                  heroTag: 'ageValue++',
+                                  heroTag: 'ageValue add',
                                   mini: true,
                                   backgroundColor: pColor,
                                   child: const Icon(Icons.add),
@@ -232,7 +226,7 @@ class _BmiModuleState extends State<BmiModule> {
                           children: [
                             FittedBox(
                               child: Text(
-                                LocaleKeys.weight.tr(),
+                                LocaleKeys.weight.tr().toUpperCase(),
                                 style:
                                     const TextStyle(fontSize: pMediumFontSize),
                               ),
@@ -251,7 +245,7 @@ class _BmiModuleState extends State<BmiModule> {
                                       weightValue--;
                                     });
                                   },
-                                  heroTag: 'weightValue--',
+                                  heroTag: 'weightValue less',
                                   mini: true,
                                   backgroundColor: pColor,
                                   child: const Icon(Icons.remove),
@@ -263,7 +257,7 @@ class _BmiModuleState extends State<BmiModule> {
                                       weightValue++;
                                     });
                                   },
-                                  heroTag: 'weightValue++',
+                                  heroTag: 'weightValue add',
                                   mini: true,
                                   backgroundColor: pColor,
                                   child: const Icon(Icons.add),
@@ -289,26 +283,29 @@ class _BmiModuleState extends State<BmiModule> {
               child: TextButton(
                 child: Center(
                   child: Text(
-                    LocaleKeys.calculate.tr(),
+                    LocaleKeys.calculate.tr().toUpperCase(),
                     style: TextStyle(
                       color: pColorText,
                     ),
                   ),
                 ),
-                onPressed: () {
-                  double result = weightValue / pow(heightValue / 100, 2);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ResultModule(
-                        heightValue: heightValue,
-                        weightValue: weightValue,
-                        yourGender: isMale,
-                        ageValue: ageValue,
-                        result: result,
-                      ),
+                 onPressed: () {
+                double result = weightValue / pow(heightValue / 100, 2);
+               // go to next screen (ResultScreen)
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                  //  passing this data (ResultScreen)
+                    builder: (context) => ResultModule(
+                      ageValue: ageValue,
+                      heightValue: heightValue,
+                      yourGender: isMale,
+                      weightValue: weightValue,
+                      result: result,
                     ),
-                  );
-                },
+                  ),
+                );
+              },
               ),
             ),
           ],
