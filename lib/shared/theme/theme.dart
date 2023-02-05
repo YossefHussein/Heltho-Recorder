@@ -9,15 +9,15 @@ import 'package:flutter/material.dart';
 Color pColor = const Color(0xFF29153D);
 Color sColor = const Color(0xFF301155);
 
-/// colors of button and item
+/// colors of button and Item
 Color pColorText = const Color(0xFFFFFFFF);
 Color pColorIcon = const Color(0xFFFFFFFF);
 Color pColorSliderInactive = const Color(0xFFBDBDBD);
 Color pColorResultButton = const Color(0xFFF44336);
 Color pColorButton = const Color(0xFF462777);
 
-/// and these are some values to I use in this app and you can use
-/// these values like size padding and other values to make your application
+/// and these are some values to I use In this app and you can use
+/// these values like size padding and other values to make your application11
 
 const double pPadding = 20;
 const double pBorderSize = 20;
