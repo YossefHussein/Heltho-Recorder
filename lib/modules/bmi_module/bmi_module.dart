@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../shared/theme/theme.dart';
 import '../../shared/translations/locale_keys.dart';
 
-
 class BmiModule extends StatefulWidget {
   const BmiModule({Key? key}) : super(key: key);
 
@@ -275,7 +274,7 @@ class _BmiModuleState extends State<BmiModule> {
             const SizedBox(
               height: pSizeBox,
             ),
-            // to give my BMI
+            // to give my (BMI)
             Container(
               width: double.infinity,
               height: 50,
@@ -289,23 +288,23 @@ class _BmiModuleState extends State<BmiModule> {
                     ),
                   ),
                 ),
-                 onPressed: () {
-                double result = weightValue / pow(heightValue / 100, 2);
-               // go to next screen (ResultScreen)
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                  //  passing this data (ResultScreen)
-                    builder: (context) => ResultModule(
-                      ageValue: ageValue,
-                      heightValue: heightValue,
-                      yourGender: isMale,
-                      weightValue: weightValue,
-                      result: result,
+                onPressed: () {
+                  double result = weightValue / pow(heightValue / 100, 2);
+                  // go to next screen (ResultModule)
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      //  passing this data (ResultModule)
+                      builder: (context) => ResultModule(
+                        ageValue: ageValue,
+                        heightValue: heightValue,
+                        yourGender: isMale,
+                        weightValue: weightValue,
+                        result: result,
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
               ),
             ),
           ],
