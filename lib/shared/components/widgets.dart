@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../theme/theme.dart';
 
-PreferredSizeWidget appBarWidget({
+import '../theme/theme.dart';
+
+Widget appBarWidget({
   String? title,
   required bool isLeading,
   IconData? leadingIconData,
