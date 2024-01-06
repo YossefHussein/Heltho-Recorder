@@ -6,15 +6,20 @@ import 'package:flutter/material.dart';
 */
 
 /// these are main colors of my application
-Color pColor = const Color(0xFF29153D);
-Color sColor = const Color(0xFF301155);
+Color pColor = Color(0xFFFFF9F9);
+Color sColor =  Color(0xFFF44336);
 
 /// colors of button and Item
-Color pColorText = const Color(0xFFFFFFFF);
-Color pColorIcon = const Color(0xFFFFFFFF);
+Color pColorText = Color(0xFF000000);
+Color pColorIcon = Color(0xFFFFFFFF);
 Color pColorSliderInactive = const Color(0xFFBDBDBD);
 Color pColorResultButton = const Color(0xFFF44336);
 Color pColorButton = const Color(0xFF462777);
+
+Color pColorSelectedFemale = Colors.pink;
+Color pColorSelectedMale = Colors.blue;
+
+
 
 /// and these are some values to I use In this app and you can use
 /// these values like size padding and other values to make your application11

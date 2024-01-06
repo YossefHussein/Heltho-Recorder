@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/theme.dart';
 
-Widget appBarWidget({
+PreferredSizeWidget appBarWidget({
   String? title,
   required bool isLeading,
   IconData? leadingIconData,

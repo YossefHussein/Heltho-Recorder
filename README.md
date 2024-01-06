@@ -5,3 +5,8 @@ My accounts:
 <br>
 [My Linkedin Account](https://www.linkedin.com/in/youssef-hussein-aa3b38277/)
 <br>
+```
+flutter pub run easy_localization:generate -S "assets\translations" -O "lib\shared\translations"
+
+flutter pub run easy_localization:generate -S "assets/translations" -O "lib\shared\translations" -o "locale_keys.dart" -f keys
+```

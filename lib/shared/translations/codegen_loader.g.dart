@@ -9,7 +9,7 @@ class CodegenLoader extends AssetLoader{
     return Future.value(mapLocales[locale.toString()]);
   }
 
-  static const Map<String,dynamic> ar = {
+  static  Map<String,dynamic> ar = {
   "woman": "امرأة",
   "man": "رجل",
   "height": "طول",
@@ -22,7 +22,7 @@ class CodegenLoader extends AssetLoader{
   "yourAge": "عمرك",
   "bmiResult": "(BMI) نتيجتك"
 };
-static const Map<String,dynamic> en = {
+static  Map<String,dynamic> en = {
   "woman": "woman",
   "man": "man",
   "height": "height",
@@ -35,7 +35,7 @@ static const Map<String,dynamic> en = {
   "yourAge": "age",
   "bmiResult": "(BMI) your result"
 };
-static const Map<String,dynamic> es = {
+static  Map<String,dynamic> es = {
   "woman": "mujer",
   "man": "hombre",
   "height": "altura ",
@@ -48,7 +48,7 @@ static const Map<String,dynamic> es = {
   "yourAge": "tu edad",
   "bmiResult": "(BMI) tu resultado"
 };
-static const Map<String,dynamic> fr = {
+static  Map<String,dynamic> fr = {
   "woman": "femme",
   "man": "homme ",
   "height": "long ",
@@ -61,5 +61,5 @@ static const Map<String,dynamic> fr = {
   "yourAge": "âge",
   "bmiResult": "(BMI) ton score"
 };
-static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en, "es": es, "fr": fr};
+static  Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en, "es": es, "fr": fr};
 }
