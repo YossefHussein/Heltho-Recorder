@@ -35,7 +35,9 @@ dependencies:
   flutter_bloc: ^8.1.3
   google_fonts: ^6.1.0
   lottie: ^2.7.0
-  audioplayers: ^5.2.1
+  fluttertoast: ^8.2.4
+  # google_mobile_ads: ^4.0.0
+
 
 
   
@@ -68,6 +70,7 @@ flutter:
     - assets/images/
     - assets/audio/piano_click.mp3
     - assets/animations/
+    - assets/animations/confetti/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

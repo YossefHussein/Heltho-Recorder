@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const woman = 'woman';
   static const man = 'man';
   static const height = 'height';
@@ -11,5 +11,8 @@ abstract class LocaleKeys {
   static const yourHeight = 'yourHeight';
   static const yourWeight = 'yourWeight';
   static const yourAge = 'yourAge';
+  static const whatIsYourGender = 'whatIsYourGender';
+  static const msgToUser = 'msgToUser';
   static const bmiResult = 'bmiResult';
+
 }

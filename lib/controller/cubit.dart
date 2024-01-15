@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'dart:math';
+
 import 'package:bmi_test/controller/states.dart';
-import 'package:bmi_test/modules/1_gender_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,5 +21,41 @@ class BmiMainCubit extends Cubit<BmiStates> {
     }
     emit(SelectedUserGender());
   }
-}
 
+  // value of height
+  int heightValue = 175;
+
+  changeSilder(double value) {
+    heightValue = value.toInt();
+    emit(ChangeSilderValue());
+  }
+
+  // value of age
+  int ageValue = 20;
+
+  void addingToAge() {
+    ageValue++;
+    emit(AddingToAge());
+  }
+
+  void lessToAge() {
+    ageValue--;
+    emit(LessToAge());
+  }
+
+  // value of weight
+  int weightValue = 70;
+  void addingToWeight() {
+    weightValue++;
+    emit(AddingToWeight());
+  }
+
+  void lessToWeight() {
+    weightValue--;
+    emit(LessToWeight());
+  }
+
+  double reusltPrint() {
+    return weightValue / pow(heightValue / 100, 2);
+  }
+}

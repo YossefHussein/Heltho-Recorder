@@ -1,12 +1,12 @@
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/layout/home_layout.dart';
 import 'package:bmi_test/modules/1_gender_user.dart';
-import 'package:bmi_test/modules/bmi_module.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'controller/cubit.dart';
 import 'shared/theme/theme.dart';
 import 'shared/translations/codegen_loader.g.dart';
@@ -15,6 +15,8 @@ Future<void> main() async {
   // you should use this with adding async to main
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  // MobileAds.instance.initialize();
   runApp(
     EasyLocalization(
       path: 'assets/translations',
@@ -25,9 +27,9 @@ Future<void> main() async {
         Locale('ar'),
       ],
       // ignore: prefer_const_constructors
-      fallbackLocale:  Locale('en'),
+      fallbackLocale: Locale('en'),
       // ignore: prefer_const_constructors
-      assetLoader:  CodegenLoader(),
+      assetLoader: CodegenLoader(),
       // ignore: prefer_const_constructors
       child: MyApp(),
     ),
@@ -42,9 +44,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => BmiMainCubit(),
       child: BlocConsumer<BmiMainCubit, BmiStates>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
             // theme of app
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: pColor,
               // add main colors to app
               colorScheme: ColorScheme.fromSwatch()
-                  .copyWith(primary: pColor, secondary: sColor),
+                  .copyWith(primary: pColor, secondary: sColor,),
               // main theme to text
               textTheme: GoogleFonts.cairoTextTheme().apply(
                 bodyColor: pColorText,
@@ -63,12 +63,13 @@ class MyApp extends StatelessWidget {
               ),
               useMaterial3: true,
             ),
-
             title: 'Bmi Test',
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            home:  GenderUser(),
+            home: ConfettiScreen(
+              targetScreen: HomeLayout(),
+            ),
           );
         },
       ),

@@ -1,5 +1,7 @@
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
+import 'package:bmi_test/modules/3_age_and_weight.dart';
+import 'package:bmi_test/modules/confetti_screen.dart';
 import 'package:bmi_test/shared/theme/theme.dart';
 import 'package:bmi_test/shared/translations/locale_keys.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,15 +16,6 @@ class HeightScreen extends StatefulWidget {
 }
 
 class _HeightScreenState extends State<HeightScreen> {
-
-  // value of height
-  int heightValue = 175;
-
-  // value of weight
-  int weightValue = 70;
-
-
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BmiMainCubit, BmiStates>(
@@ -34,130 +27,16 @@ class _HeightScreenState extends State<HeightScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'what is you gender (${BmiMainCubit.get(context).isMale == null ? "I dont know" : "${BmiMainCubit.get(context).isMale == false ? "female" : "male"}"})',
-                  style: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-
-                /// selected gender of user male or female
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () async {
-                            // setState(() {
-                            //   isMale = false;
-                            // });
-                            // // playAudio();
-                            BmiMainCubit.get(context).selctedUserGender(false);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: BmiMainCubit.get(context).isMale == false
-                                  ? pColorSelectedFemale
-                                  : sColor,
-                              borderRadius: BorderRadius.circular(pBorderSize),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.female,
-                                  size: pIconSize,
-                                ),
-                                const SizedBox(height: pSizeBox),
-                                Text(
-                                  LocaleKeys.woman.tr().toUpperCase(),
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: pPadding,
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () async {
-                            // setState(() {
-                            //   isMale = false;
-                            // });
-                            // // playAudio();
-                            BmiMainCubit.get(context).selctedUserGender(true);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: BmiMainCubit.get(context).isMale == true
-                                  ? pColorSelectedMale
-                                  : sColor,
-                              borderRadius: BorderRadius.circular(pBorderSize),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.male,
-                                  size: pIconSize,
-                                ),
-                                const SizedBox(height: pSizeBox),
-                                Text(
-                                  LocaleKeys.man.tr().toUpperCase(),
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Spacer(),
-                // to give my (BMI)
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  color: pColorResultButton,
-                  child: TextButton(
-                    child: Center(
-                      child: Text(
-                        LocaleKeys.calculate.tr().toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      
-      },
-    );
-  }
-}
-
-
-/**
- * Expanded(
+                const Spacer(),
+                Expanded(
                   child: Padding(
                     // note here I not use (EdgeInsets.all) because when use
                     // (EdgeInsets.all) will adding padding of Selected gender part
                     // to select Selected your height part
                     // when do this padding will be 40 not 20
                     padding: const EdgeInsets.symmetric(
-                      horizontal: pPadding,
+                      horizontal: pPadding / 2,
+                      vertical: pPadding / 3,
                     ),
                     child: Container(
                       decoration: BoxDecoration(
@@ -176,7 +55,7 @@ class _HeightScreenState extends State<HeightScreen> {
                             textBaseline: TextBaseline.alphabetic,
                             children: [
                               Text(
-                                '$heightValue',
+                                '${BmiMainCubit.get(context).heightValue}',
                                 style: const TextStyle(
                                   fontSize: pLargeFontSize,
                                   fontWeight: FontWeight.w900,
@@ -186,16 +65,19 @@ class _HeightScreenState extends State<HeightScreen> {
                             ],
                           ),
                           Slider(
-                            value: heightValue.toDouble(),
+                            value: BmiMainCubit.get(context)
+                                .heightValue
+                                .toDouble(),
                             max: 215,
                             min: 130,
                             inactiveColor: pColor,
-                            activeColor: pColorSliderInactive,
-                            label: heightValue.round().toString(),
+                            activeColor: pColor,
+                            label: BmiMainCubit.get(context)
+                                .heightValue
+                                .round()
+                                .toString(),
                             onChanged: (double value) {
-                              setState(() {
-                                heightValue = value.toInt();
-                              });
+                              BmiMainCubit.get(context).changeSilder(value);
                             },
                           )
                         ],
@@ -203,4 +85,38 @@ class _HeightScreenState extends State<HeightScreen> {
                     ),
                   ),
                 ),
- */
+                const Spacer(),
+                // to give my (BMI)
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  color: pColorResultButton,
+                  child: TextButton(
+                    child: Center(
+                      child: Text(
+                        LocaleKeys.calculate.tr().toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ConfettiScreen(
+                            targetScreen: const AgeAndWeightScreen(),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

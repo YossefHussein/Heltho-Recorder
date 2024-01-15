@@ -9,5 +9,7 @@
     "yourHeight" : "tu altura",
     "yourWeight" : "tu peso",
     "yourAge" : "tu edad",
+    "whatIsYourGender": "Cuál es tu género",
+    "msgToUser":"¿No lo sé? Elige tu género desde cualquier botón bajo",
     "bmiResult" : "(BMI) tu resultado"
 }

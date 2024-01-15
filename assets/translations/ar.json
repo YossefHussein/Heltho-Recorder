@@ -1,13 +1,15 @@
 {
-    "woman" : "امرأة",
-    "man" :"رجل",
-    "height" : "طول",
-    "age" : "عمر",
-    "weight" : "وزن",
+    "woman" : "بنت",
+    "man" :"ولد",
+    "height" : "طولك",
+    "age" : "عمرك",
+    "weight" : "وزنك",
     "calculate" : "أحسب",
     "yourGender" : "جنسك",
     "yourHeight" : "طولك",
     "yourWeight" : "وزنك",
     "yourAge" : "عمرك",
+    "whatIsYourGender": "اختر جنسك",
+    "msgToUser":"انا مش عارف؟ اختر جنسك من اي زرار تحت",
     "bmiResult" : "(BMI) نتيجتك"
 }

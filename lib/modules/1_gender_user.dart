@@ -1,10 +1,11 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/modules/2_height.dart';
+import 'package:bmi_test/modules/confetti_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:just_audio/just_audio.dart';
 
@@ -22,18 +23,8 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
   // this value to use in selected what is gender of user
   // bool isMale = false;
 
-
-  String pathAudio = "assets/audio/piano_click.mp3";
-
-  // void playAudio() async {
-  //   await player.setAsset(pathAudio);
-  //   player.play();
-  // }
-
   late AnimationController _controllerFemale;
   late AnimationController _controllerMale;
-
-  final player = AudioPlayer();
 
   @override
   void initState() {
@@ -60,7 +51,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Spacer(),
+                const Spacer(),
                 BmiMainCubit.get(context).isMale == null
                     ? Lottie.asset('assets/animations/pushups.json')
                     : BmiMainCubit.get(context).isMale == false
@@ -87,14 +78,14 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                             },
                           ),
                 Text(
-                  'what is you gender \n (${BmiMainCubit.get(context).isMale == null ? "I dont know? please preesd to selected \n your gender" : "${BmiMainCubit.get(context).isMale == false ? "female" : "male"}"})',
+                  '${LocaleKeys.whatIsYourGender.tr()} \n (${BmiMainCubit.get(context).isMale == null ? "${LocaleKeys.msgToUser.tr()}" : "${BmiMainCubit.get(context).isMale == false ? "${LocaleKeys.woman.tr()}" : " ${LocaleKeys.man.tr()}"}"})',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
 
                 /// selected gender of user male or female
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Padding(
@@ -103,9 +94,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: () async {
-                            await AudioPlayer().play(
-                                AssetSource('assets/audio/piano_click.mp3'));
+                          onTap: () {
                             BmiMainCubit.get(context).selctedUserGender(false);
                           },
                           child: Container(
@@ -171,15 +160,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                TextButton(
-                    onPressed: () async {
-                      await player.play(AssetSource(pathAudio));
-                    },
-                    child: Text(
-                      "hello",
-                      style: TextStyle(color: Colors.black),
-                    )),
-                Spacer(),
+                const Spacer(),
                 // to give my (BMI)
                 Container(
                   width: double.infinity,
@@ -189,16 +170,42 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                     child: Center(
                       child: Text(
                         LocaleKeys.calculate.tr().toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      if (context.read<BmiMainCubit>().isMale == true) {
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HeightScreen()));
+                            builder: (context) => ConfettiScreen(
+                              // this line to move to diffrance screen when call this screen
+                              targetScreen: const HeightScreen(),
+                            ),
+                          ),
+                        );
+                      } else if (context.read<BmiMainCubit>().isMale == false) { Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ConfettiScreen(
+                            // this line to move to diffrance screen when call this screen
+                            targetScreen: const HeightScreen(),
+                          ),
+                        ),
+                      );}
+                      else if (context.read<BmiMainCubit>().isMale == null){
+                        Fluttertoast.showToast(
+                          msg: "Selcted gender",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                      }
                     },
                   ),
                 ),

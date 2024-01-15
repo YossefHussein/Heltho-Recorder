@@ -1,8 +1,8 @@
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
+import 'package:bmi_test/modules/1_gender_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../modules/bmi_module.dart';
 import '../shared/components/widgets.dart';
 
 class HomeLayout extends StatelessWidget {
@@ -16,11 +16,7 @@ class HomeLayout extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: appBarWidget(
-            title: 'BMI',
-            isLeading: false,
-          ),
-          body: const BmiModule(),
+          body: const GenderUser(),
         );
       },
     );

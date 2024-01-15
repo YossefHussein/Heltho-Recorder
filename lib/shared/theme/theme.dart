@@ -12,7 +12,7 @@ Color sColor =  Color(0xFFF44336);
 /// colors of button and Item
 Color pColorText = Color(0xFF000000);
 Color pColorIcon = Color(0xFFFFFFFF);
-Color pColorSliderInactive = const Color(0xFFBDBDBD);
+Color pColorSliderInactive = Color.fromARGB(255, 174, 26, 26);
 Color pColorResultButton = const Color(0xFFF44336);
 Color pColorButton = const Color(0xFF462777);
 

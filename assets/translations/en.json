@@ -1,13 +1,15 @@
 {
-    "woman" : "woman",
-    "man" :"man",
-    "height" : "height",
-    "age" : "age",
+    "woman" : "Woman",
+    "man" :"Man",
+    "height" : "Height",
+    "age" : "Age",
     "weight" : "weight",
     "calculate" : "Calculate",
-    "yourGender" : "gender",
-    "yourHeight" : "height",
-    "yourWeight" : "weight",
-    "yourAge" : "age",
+    "yourGender" : "Gender",
+    "yourHeight" : "Height",
+    "yourWeight" : "Weight",
+    "yourAge" : "Age",
+    "whatIsYourGender": "What is your gender",
+    "msgToUser": "I don't know? Please click to selcted your gender",
     "bmiResult" : "(BMI) your result"
 }
