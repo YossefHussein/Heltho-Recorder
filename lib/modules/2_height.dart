@@ -48,6 +48,10 @@ class _HeightScreenState extends State<HeightScreen> {
                         children: [
                           Text(
                             LocaleKeys.height.tr().toUpperCase(),
+                            style: const TextStyle(
+                              fontSize: pMediumFontSize,
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +65,11 @@ class _HeightScreenState extends State<HeightScreen> {
                                   fontWeight: FontWeight.w900,
                                 ),
                               ),
-                              const Text('cm'),
+                              const Text('cm',
+                                style: const TextStyle(
+                                  fontSize: pLargeFontSize,
+                                  fontWeight: FontWeight.w100,
+                                ),),
                             ],
                           ),
                           Slider(

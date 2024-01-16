@@ -1,4 +1,4 @@
-package com.example.bmi_test
+package com.app.away.bmi.recorder
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bmi_test">
+    package="com.app.away.bmi.recorder">
    <application
         android:label="Bmi Test"
         android:name="${applicationName}"
