@@ -11,12 +11,10 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BmiMainCubit, BmiStates>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
-        return Scaffold(
-          body: const GenderUser(),
+        return const Scaffold(
+          body:  GenderUser(),
         );
       },
     );

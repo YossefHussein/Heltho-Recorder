@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 
 class ConfettiScreen extends StatefulWidget {
 
-  Widget targetScreen;
+  String targetScreen;
   ConfettiScreen({super.key, required this.targetScreen});
 
   @override
@@ -45,6 +45,7 @@ class _ConfettiScreenState extends State<ConfettiScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Lottie.asset(
           animationList[_random.nextInt(animationList.length)],
@@ -54,13 +55,9 @@ class _ConfettiScreenState extends State<ConfettiScreen>
               ..duration = composition.duration
               ..forward().whenComplete(
                 () {
-                  Navigator.pushReplacement(
+                  Navigator.pushReplacementNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return widget.targetScreen;
-                      },
-                    ),
+                    widget.targetScreen
                   );
                 },
               );

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "387089952907",
+    "project_id": "bmi-test-future-it-way",
+    "storage_bucket": "bmi-test-future-it-way.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387089952907:android:e29f6a83e87e334834648e",
+        "android_client_info": {
+          "package_name": "com.futrueitway.bmi.recorder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY0DsTRM5nCW0323NR-ZXkc6k3Fiw-RL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

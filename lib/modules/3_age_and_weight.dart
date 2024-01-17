@@ -2,6 +2,7 @@ import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/modules/4_result.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
+import 'package:bmi_test/shared/routes/main_routes.dart';
 import 'package:bmi_test/shared/theme/theme.dart';
 import 'package:bmi_test/shared/translations/locale_keys.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -15,7 +16,6 @@ class AgeAndWeightScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<BmiMainCubit, BmiStates>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         return Scaffold(
@@ -173,7 +173,7 @@ class AgeAndWeightScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => ConfettiScreen(
-                            targetScreen: const ResultScreen(),
+                            targetScreen: resultScreenRoute,
                           ),
                         ),
                       );

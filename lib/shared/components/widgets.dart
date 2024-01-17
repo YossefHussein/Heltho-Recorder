@@ -12,14 +12,14 @@ PreferredSizeWidget appBarWidget({
       title: Text(
         '$title',
         style: const TextStyle(
-          color: Colors.white,
+          color: Colors.black,
         ),
       ),
       leading: isLeading
           ? IconButton(
               icon: Icon(
                 leadingIconData,
-                color: pColorIcon,
+                color: pColorButtonIcon,
               ),
               onPressed: leadingFunction,
             )

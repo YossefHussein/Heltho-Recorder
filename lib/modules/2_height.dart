@@ -2,6 +2,8 @@ import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/modules/3_age_and_weight.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
+import 'package:bmi_test/shared/components/widgets.dart';
+import 'package:bmi_test/shared/routes/main_routes.dart';
 import 'package:bmi_test/shared/theme/theme.dart';
 import 'package:bmi_test/shared/translations/locale_keys.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -48,7 +50,9 @@ class _HeightScreenState extends State<HeightScreen> {
                         children: [
                           Text(
                             LocaleKeys.height.tr().toUpperCase(),
-                            style: const TextStyle(
+                            style:  TextStyle(
+                              color: pColor,
+
                               fontSize: pMediumFontSize,
                               fontWeight: FontWeight.w900,
                             ),
@@ -60,16 +64,20 @@ class _HeightScreenState extends State<HeightScreen> {
                             children: [
                               Text(
                                 '${BmiMainCubit.get(context).heightValue}',
-                                style: const TextStyle(
+                                style:  TextStyle(
+                                  color: pColor,
                                   fontSize: pLargeFontSize,
                                   fontWeight: FontWeight.w900,
                                 ),
                               ),
-                              const Text('cm',
-                                style: const TextStyle(
+                              Text(
+                                'cm',
+                                style: TextStyle(
+                                  color: pColor,
                                   fontSize: pLargeFontSize,
                                   fontWeight: FontWeight.w100,
-                                ),),
+                                ),
+                              ),
                             ],
                           ),
                           Slider(
@@ -109,11 +117,11 @@ class _HeightScreenState extends State<HeightScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => ConfettiScreen(
-                            targetScreen: const AgeAndWeightScreen(),
+                            targetScreen: ageAndWeightScreenRoute,
                           ),
                         ),
                       );

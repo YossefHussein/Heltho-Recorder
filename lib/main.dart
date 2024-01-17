@@ -1,7 +1,12 @@
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/layout/home_layout.dart';
 import 'package:bmi_test/modules/1_gender_user.dart';
+import 'package:bmi_test/modules/2_height.dart';
+import 'package:bmi_test/modules/3_age_and_weight.dart';
+import 'package:bmi_test/modules/4_result.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
+import 'package:bmi_test/modules/old_app/result_module.dart';
+import 'package:bmi_test/shared/routes/main_routes.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,8 +56,10 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               scaffoldBackgroundColor: pColor,
               // add main colors to app
-              colorScheme: ColorScheme.fromSwatch()
-                  .copyWith(primary: pColor, secondary: sColor,),
+              colorScheme: ColorScheme.fromSwatch().copyWith(
+                primary: pColor,
+                secondary: sColor,
+              ),
               // main theme to text
               textTheme: GoogleFonts.cairoTextTheme().apply(
                 bodyColor: pColorText,
@@ -67,9 +74,15 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            home: ConfettiScreen(
-              targetScreen: HomeLayout(),
-            ),
+            // default screen 
+            initialRoute: homeLayoutRoute,
+            routes: {
+              homeLayoutRoute: (context) => const HomeLayout(),
+              genderUserScreenRoute: (context) => const GenderUser(),
+              heightScreenRoute: (context) => const HeightScreen(),
+              ageAndWeightScreenRoute: (context) => const AgeAndWeightScreen(),
+              resultScreenRoute: (context) => const ResultScreen(),
+            },
           );
         },
       ),

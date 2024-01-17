@@ -8,16 +8,15 @@ import 'package:flutter/material.dart';
 /// these are main colors of my application
 Color pColor = Color(0xFFFFF9F9);
 Color sColor =  Color(0xFFF44336);
-
-/// colors of button and Item
-Color pColorText = Color(0xFF000000);
-Color pColorIcon = Color(0xFFFFFFFF);
-Color pColorSliderInactive = Color.fromARGB(255, 174, 26, 26);
 Color pColorResultButton = const Color(0xFFF44336);
-Color pColorButton = const Color(0xFF462777);
+Color pColorIcon = Color(0xFFFFFFFF);
+Color pColorButtonIcon = Color(0xFF000000);
 
 Color pColorSelectedFemale = Colors.pink;
 Color pColorSelectedMale = Colors.blue;
+
+
+
 
 
 
@@ -33,3 +32,9 @@ const double pIconSize = 50;
 const double pLargeFontSize = 30.0;
 const double pMediumFontSize = 20;
 const double pSmallFontSize = 15;
+
+/// colors of button and Item
+/// this is in old project used
+Color pColorText = Color(0xFF000000);
+Color pColorSliderInactive = Color(0xFF351D5B);
+Color pColorButton = const Color(0xFF462777);
