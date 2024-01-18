@@ -97,15 +97,17 @@ class ResultScreen extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                        onTap: () async {
-                            final Uri _url = Uri.parse(
-                              'https://ourworldindata.org/obesity#',
-                            );
-                            if (!await launchUrl(_url)) {
-                              throw Exception('Could not launch $_url');
-                            }
-                        },
-                        child: Text("to see artical click on photo"))
+                      onTap: () async {
+                        final Uri _url = Uri.parse(
+                          'https://ourworldindata.org/obesity#',
+                        );
+                        if (!await launchUrl(_url,
+                            mode: LaunchMode.externalApplication)) {
+                          throw Exception('Could not launch $_url');
+                        }
+                      },
+                      child: Text("to see artical click on photo"),
+                    )
                   ],
                 ),
               ),
