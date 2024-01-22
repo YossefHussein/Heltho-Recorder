@@ -1,3 +1,22 @@
+
+
+// !! this is screed is was chagned to be new screen
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:easy_localization/easy_localization.dart';

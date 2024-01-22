@@ -1,4 +1,4 @@
-package com.futrueitway.bmi.recorder
+package com.futureitway.health.recorder
 
 import io.flutter.embedding.android.FlutterActivity
 

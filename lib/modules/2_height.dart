@@ -1,8 +1,6 @@
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
-import 'package:bmi_test/modules/3_age_and_weight.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
-import 'package:bmi_test/shared/components/widgets.dart';
 import 'package:bmi_test/shared/routes/main_routes.dart';
 import 'package:bmi_test/shared/theme/theme.dart';
 import 'package:bmi_test/shared/translations/locale_keys.dart';
@@ -50,9 +48,8 @@ class _HeightScreenState extends State<HeightScreen> {
                         children: [
                           Text(
                             LocaleKeys.height.tr().toUpperCase(),
-                            style:  TextStyle(
+                            style: TextStyle(
                               color: pColor,
-
                               fontSize: pMediumFontSize,
                               fontWeight: FontWeight.w900,
                             ),
@@ -64,7 +61,7 @@ class _HeightScreenState extends State<HeightScreen> {
                             children: [
                               Text(
                                 '${BmiMainCubit.get(context).heightValue}',
-                                style:  TextStyle(
+                                style: TextStyle(
                                   color: pColor,
                                   fontSize: pLargeFontSize,
                                   fontWeight: FontWeight.w900,
@@ -84,16 +81,16 @@ class _HeightScreenState extends State<HeightScreen> {
                             value: BmiMainCubit.get(context)
                                 .heightValue
                                 .toDouble(),
-                            max: 215,
-                            min: 130,
+                            max: 220,
+                            min: 34.5,
                             inactiveColor: pColor,
                             activeColor: pColor,
-                            label: BmiMainCubit.get(context)
+                            label: context.read<BmiMainCubit>()
                                 .heightValue
-                                .round()
+                                .toInt()
                                 .toString(),
                             onChanged: (double value) {
-                              BmiMainCubit.get(context).changeSilder(value);
+                              BmiMainCubit.get(context).changeSlider(value);
                             },
                           )
                         ],
@@ -102,7 +99,7 @@ class _HeightScreenState extends State<HeightScreen> {
                   ),
                 ),
                 const Spacer(),
-                // to give my (BMI)
+                // move to age and weight screen
                 Container(
                   width: double.infinity,
                   height: 50,
@@ -110,7 +107,7 @@ class _HeightScreenState extends State<HeightScreen> {
                   child: TextButton(
                     child: Center(
                       child: Text(
-                        LocaleKeys.calculate.tr().toUpperCase(),
+                        LocaleKeys.whatAfterThat.tr().toUpperCase(),
                         style: const TextStyle(
                           color: Colors.white,
                         ),
@@ -121,10 +118,12 @@ class _HeightScreenState extends State<HeightScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => ConfettiScreen(
+                            // this line to move to difference screen when call this screen
                             targetScreen: ageAndWeightScreenRoute,
                           ),
                         ),
                       );
+                      //  Navigator.pushNamed(context,ageAndWeightScreenRoute);
                     },
                   ),
                 ),

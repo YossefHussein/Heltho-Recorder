@@ -21,13 +21,16 @@ class CodegenLoader extends AssetLoader{
   "age": "عمرك",
   "weight": "وزنك",
   "calculate": "أحسب",
+  "whatAfterThat": "و بعد كدة",
   "yourGender": "جنسك",
   "yourHeight": "طولك",
   "yourWeight": "وزنك",
   "yourAge": "عمرك",
   "whatIsYourGender": "اختر جنسك",
   "msgToUser": "انا مش عارف؟ اختر جنسك من اي زرار تحت",
-  "bmiResult": "(BMI) نتيجتك"
+  "bmiResult": "(BMI) نتيجتك",
+  "nameOfScreenResult": "نتيجه",
+  "clickArticleOnPhotoToSeeArtical": "عشان تشوف اكتر من مقالة بتاعت صورة ممكن تدوس عليها او من هنا"
 };
 static const Map<String,dynamic> en = {
   "woman": "Woman",
@@ -39,10 +42,13 @@ static const Map<String,dynamic> en = {
   "yourGender": "Gender",
   "yourHeight": "Height",
   "yourWeight": "Weight",
+  "whatAfterThat": "What After that",
   "yourAge": "Age",
   "whatIsYourGender": "What is your gender",
-  "msgToUser": "I don't know? Please click to selcted your gender",
-  "bmiResult": "(BMI) your result"
+  "msgToUser": "I don't know? Please click to selected your gender",
+  "bmiResult": "(BMI) your result",
+  "nameOfScreenResult": "result",
+  "clickArticleOnPhotoToSeeArtical": "to see article click on photo"
 };
 static const Map<String,dynamic> es = {
   "woman": "mujer",
@@ -57,7 +63,9 @@ static const Map<String,dynamic> es = {
   "yourAge": "tu edad",
   "whatIsYourGender": "Cuál es tu género",
   "msgToUser": "¿No lo sé? Elige tu género desde cualquier botón bajo",
-  "bmiResult": "(BMI) tu resultado"
+  "bmiResult": "(BMI) tu resultado",
+  "nameOfScreenResult": "resultado",
+  "clickArticleOnPhotoToSeeArtical": "para ver el artículo haga clic en la foto"
 };
 static const Map<String,dynamic> fr = {
   "woman": "femme",
@@ -72,7 +80,9 @@ static const Map<String,dynamic> fr = {
   "yourAge": "âge",
   "whatIsYourGender": "Quel est votre genre",
   "msgToUser": "Je ne sais pas? Choisissez votre sexe à partir de n’importe quel bouton sous",
-  "bmiResult": "(BMI) ton score"
+  "bmiResult": "(BMI) ton score",
+  "nameOfScreenResult": "résultat",
+  "clickArticleOnPhotoToSeeArtical": "Pour voir l’article cliquez sur la photo"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en, "es": es, "fr": fr};
 }

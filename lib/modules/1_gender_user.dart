@@ -1,6 +1,6 @@
+
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
-import 'package:bmi_test/modules/2_height.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
 import 'package:bmi_test/shared/routes/main_routes.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:just_audio/just_audio.dart';
 
@@ -22,9 +24,8 @@ class GenderUser extends StatefulWidget {
 }
 
 class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
-  // this value to use in selected what is gender of user
-  // bool isMale = false;
 
+  // this to controller on animation
   late AnimationController _controllerFemale;
   late AnimationController _controllerMale;
 
@@ -49,7 +50,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
       builder: (context, state) {
         return Scaffold(
           body: CustomScrollView(
-            // physics: const BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             slivers: [
               SliverFillRemaining(
                 hasScrollBody: false,
@@ -61,6 +62,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                       const Spacer(),
                       BmiMainCubit.get(context).isMale == null
                           ? Lottie.asset('assets/animations/pushups.json')
+                          // see female icon if user is female
                           : BmiMainCubit.get(context).isMale == false
                               ? Lottie.asset(
                                   'assets/animations/avatar_female.json',
@@ -73,6 +75,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                                       ..forward();
                                   },
                                 )
+                              //  see man icon is the
                               : Lottie.asset(
                                   'assets/animations/avatar_man.json',
                                   controller: _controllerMale,
@@ -84,11 +87,14 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                                       ..forward();
                                   },
                                 ),
-                      Text(
-                        '${LocaleKeys.whatIsYourGender.tr()} \n (${BmiMainCubit.get(context).isMale == null ? "${LocaleKeys.msgToUser.tr()}" : "${BmiMainCubit.get(context).isMale == false ? "${LocaleKeys.woman.tr()}" : " ${LocaleKeys.man.tr()}"}"})',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          '${LocaleKeys.whatIsYourGender.tr()} \n (${BmiMainCubit.get(context).isMale == null ? "${LocaleKeys.msgToUser.tr()}" : "${BmiMainCubit.get(context).isMale == false ? "${LocaleKeys.woman.tr()}" : " ${LocaleKeys.man.tr()}"}"})',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
                       ),
 
                       /// selected gender of user male or female
@@ -114,20 +120,24 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                                     borderRadius:
                                         BorderRadius.circular(pBorderSize),
                                   ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.female,
-                                        size: pIconSize,
-                                      ),
-                                      const SizedBox(height: pSizeBox),
-                                      Text(
-                                        LocaleKeys.woman.tr().toUpperCase(),
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                    ],
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const FaIcon(
+                                          FontAwesomeIcons.female,
+                                          size: pIconSize,
+                                        ),
+                                        const SizedBox(height: pSizeBox),
+                                        Text(
+                                          LocaleKeys.woman.tr().toUpperCase(),
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -138,10 +148,6 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () async {
-                                  // setState(() {
-                                  //   isMale = false;
-                                  // });
-                                  // // playAudio();
                                   BmiMainCubit.get(context)
                                       .selctedUserGender(true);
                                 },
@@ -154,20 +160,24 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                                     borderRadius:
                                         BorderRadius.circular(pBorderSize),
                                   ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.male,
-                                        size: pIconSize,
-                                      ),
-                                      const SizedBox(height: pSizeBox),
-                                      Text(
-                                        LocaleKeys.man.tr().toUpperCase(),
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                    ],
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const FaIcon(
+                                          FontAwesomeIcons.person,
+                                          size: pIconSize,
+                                        ),
+                                        const SizedBox(height: pSizeBox),
+                                        Text(
+                                          LocaleKeys.man.tr().toUpperCase(),
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -184,7 +194,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                         child: TextButton(
                           child: Center(
                             child: Text(
-                              LocaleKeys.calculate.tr().toUpperCase(),
+                              "${LocaleKeys.whatAfterThat.tr().toUpperCase()}",
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
@@ -196,7 +206,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ConfettiScreen(
-                                    // this line to move to diffrance screen when call this screen
+                                    // this line to move to difference screen when call this screen
                                     targetScreen: heightScreenRoute,
                                   ),
                                 ),
@@ -207,7 +217,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ConfettiScreen(
-                                    // this line to move to diffrance screen when call this screen
+                                    // this line to move to difference screen when call this screen
                                     targetScreen: heightScreenRoute,
                                   ),
                                 ),
@@ -215,10 +225,10 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                             } else if (context.read<BmiMainCubit>().isMale ==
                                 null) {
                               Fluttertoast.showToast(
-                                msg: "Selcted gender",
+                                msg: "Selected gender",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
+                                timeInSecForIosWeb: 3,
                                 backgroundColor: Colors.red,
                                 textColor: Colors.white,
                                 fontSize: 16.0,

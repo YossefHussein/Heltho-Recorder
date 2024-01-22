@@ -5,7 +5,7 @@ import '../theme/theme.dart';
 PreferredSizeWidget appBarWidget({
   String? title,
   required bool isLeading,
-  IconData? leadingIconData,
+   leadingIconData,
   Function()? leadingFunction,
 }) =>
     AppBar(

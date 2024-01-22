@@ -7,6 +7,7 @@ abstract class  LocaleKeys {
   static const age = 'age';
   static const weight = 'weight';
   static const calculate = 'calculate';
+  static const whatAfterThat = 'whatAfterThat';
   static const yourGender = 'yourGender';
   static const yourHeight = 'yourHeight';
   static const yourWeight = 'yourWeight';
@@ -14,5 +15,7 @@ abstract class  LocaleKeys {
   static const whatIsYourGender = 'whatIsYourGender';
   static const msgToUser = 'msgToUser';
   static const bmiResult = 'bmiResult';
+  static const nameOfScreenResult = 'nameOfScreenResult';
+  static const clickArticleOnPhotoToSeeArtical = 'clickArticleOnPhotoToSeeArtical';
 
 }

@@ -30,30 +30,64 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  # adding other language
   easy_localization: ^3.0.1
+  # state management
   bloc: ^8.1.2
   flutter_bloc: ^8.1.3
+  # adding some fonts
   google_fonts: ^6.1.0
+  # this to adding easy animation
   lottie: ^2.7.0
+  # for adding message seeding to user if user wrong input
   fluttertoast: ^8.2.4
+  # adding svg image
   flutter_svg: ^2.0.9
+  # for zooming on image
+#  photo_view: ^0.14.0
+  # to open link
   url_launcher: ^6.2.3
-#  google_mobile_ads: ^4.0.0
+  # google_mobile_ads: ^4.0.0
   fl_chart: ^0.66.0
+  #  adding some sound
+  just_audio: ^0.9.36
+  # this is for profotional routing [future feature]
   go_router: ^13.0.1
-
+  # send user message if is docent exist on app [future feature]
+  flutter_local_notifications: ^16.3.0
+  #  local database
+  sqflite: ^2.3.0
+  path: ^1.8.0
+  # to collection the data to help the analysis
+  battery_plus: ^5.0.2
+  network_info_plus: ^4.1.0
+  device_info_plus: ^9.1.1
+  location: ^5.0.0
+  # to selected image to profile this is [future feature]
+#  image_picker: ^1.0.7
+  # save small things
+  shared_preferences: ^2.2.2
+  # font and icon
+  font_awesome_flutter: ^10.6.0
+  # http: ^0.13.4
+  # imagedownloader: ^0.31.0
+  # logger: ^1.1.0
+  # permissionhandler: ^8.3.0
+  # shareplus: ^3.0.4
+  # stacked: ^2.2.8
+  # to make user ID
+  uuid: ^4.3.3
+  google_mobile_ads: ^4.0.0
 
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  # buildrunner: ^2.1.7
+  # stacked_generator: ^0.5.7
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -71,7 +105,7 @@ flutter:
   assets:
     - assets/translations/
     - assets/images/
-    - assets/audio/piano_click.mp3
+    # - assets/audio/piano_click.mp3
     - assets/animations/
     - assets/animations/confetti/
 

@@ -1,15 +1,17 @@
 {
-    "woman" : "femme",
-    "man" :"homme ",
-    "height" : "long ",
-    "age" : "âge",
-    "weight" : "poids",
-    "calculate" : "calculer",
-    "yourGender" : "votre sexe",
-    "yourHeight" : "votre taille",
-    "yourWeight" : "poids",
-    "yourAge" : "âge",
+    "woman": "femme",
+    "man": "homme ",
+    "height": "long ",
+    "age": "âge",
+    "weight": "poids",
+    "calculate": "calculer",
+    "yourGender": "votre sexe",
+    "yourHeight": "votre taille",
+    "yourWeight": "poids",
+    "yourAge": "âge",
     "whatIsYourGender": "Quel est votre genre",
     "msgToUser": "Je ne sais pas? Choisissez votre sexe à partir de n’importe quel bouton sous",
-    "bmiResult" : "(BMI) ton score"
+    "bmiResult": "(BMI) ton score",
+    "nameOfScreenResult": "résultat",
+    "clickArticleOnPhotoToSeeArtical": "Pour voir l’article cliquez sur la photo"
 }

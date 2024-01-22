@@ -1,6 +1,5 @@
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
-import 'package:bmi_test/modules/4_result.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
 import 'package:bmi_test/shared/routes/main_routes.dart';
 import 'package:bmi_test/shared/theme/theme.dart';
@@ -169,6 +168,7 @@ class AgeAndWeightScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
+                      // context.read<BmiMainCubit>().changeLocalAuth();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
