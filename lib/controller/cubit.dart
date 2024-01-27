@@ -35,12 +35,12 @@ class BmiMainCubit extends Cubit<BmiStates> {
 
   // value of age
   int ageValue = 20;
-
+  // adding to age
   void addingToAge() {
     ageValue++;
     emit(AddingToAge());
   }
-
+  // less to age
   void lessToAge() {
     ageValue--;
     emit(LessToAge());
@@ -48,13 +48,13 @@ class BmiMainCubit extends Cubit<BmiStates> {
 
   // value of weight
   int weightValue = 70;
-
+  // adding to weight
   void addingToWeight() {
     weightValue.round();
     weightValue++;
     emit(AddingToWeight());
   }
-
+  // less to weight
   void lessToWeight() {
     weightValue.round();
     weightValue--;
@@ -75,14 +75,14 @@ class BmiMainCubit extends Cubit<BmiStates> {
 
   /// this to save if user complete test
   /// and this function is set key
- void noUserCompletedTest() async {
+  void noUserCompletedTest() async {
     prefs = await SharedPreferences.getInstance();
     // Save an boolean value to 'repeat' key.
     await prefs.setBool('userNotCompleted', userNotCompleted);
     emit(NoUserCompletedTest());
   }
 
-void  yseUserCompletedTest() async {
+  void yseUserCompletedTest() async {
     prefs = await SharedPreferences.getInstance();
     // Save an boolean value to 'repeat' key.
     await prefs.getBool('userNotCompleted');
@@ -96,52 +96,54 @@ void  yseUserCompletedTest() async {
   }
 
   void deleteLocalAuth() async {
-    await prefs.remove('counter');
-     noUserCompletedTest();
+    userNotCompleted = !userNotCompleted;
+    await prefs.remove('userNotCompleted');
+    noUserCompletedTest();
     emit(DeleteLocalAuth());
   }
 
   /// local database of application
-  // static Database? _database;
-  // static const String tableName = 'user_data';
 
-  // Future<Database> get database async {
-  //   if (_database != null) return _database!;
-  //   _database = await initDatabase();
-  //   return _database!;
-  // }
+  static Database? _database;
+  static const String tableName = 'user_data';
 
-  // Future<Database> initDatabase() async {
-  //   String path = join(await getDatabasesPath(), 'user_database.db');
-  //   return await openDatabase(
-  //     path,
-  //     version: 1,
-  //     onCreate: (db, version) async {
-  //       await db.execute('''
-  //         CREATE TABLE $tableName(
-  //           id INTEGER PRIMARY KEY AUTOINCREMENT,
-  //           gender TEXT,
-  //           height REAL,
-  //           weight REAL,
-  //           age INTEGER,
-  //           bmi REAL
-  //         )
-  //       ''');
-  //     },
-  //   );
-  // }
+  Future<Database> get database async {
+    if (_database != null) return _database!;
+    _database = await initDatabase();
+    return _database!;
+  }
 
-  // Future<void> insertUserData(Map<String, dynamic> userData) async {
-  //   userData['bmi'] =
-  //       resultPrint(height: userData['height'], weight: userData['weight']);
-  //   Database db = await database;
-  //   await db.insert(tableName, userData);
-  // }
+  Future<Database> initDatabase() async {
+    String path = join(await getDatabasesPath(), 'user_database.db');
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute('''
+          CREATE TABLE $tableName(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            gender bool,
+            height REAL,
+            weight REAL,
+            age INTEGER,
+            bmi REAL
+          )
+        ''');
+      },
+    );
+  }
 
-  // Future<List<Map<String, dynamic>>> getUserData() async {
-  //   Database db = await database;
-  //   return await db.query(tableName);
-  // }
+  Future<void> insertUserData(Map<String, dynamic> userData) async {
+    userData['bmi'] = resultPrint(
+      height: userData['height'],
+      weight: userData['weight'],
+    );
+    Database db = await database;
+    await db.insert(tableName, userData);
+  }
 
-  
+  Future<List<Map<String, dynamic>>> getUserData() async {
+    Database db = await database;
+    return await db.query(tableName);
+  }
 }

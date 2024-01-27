@@ -5,6 +5,7 @@ import 'package:bmi_test/modules/2_height.dart';
 import 'package:bmi_test/modules/3_age_and_weight.dart';
 import 'package:bmi_test/modules/4_result.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
+
 // import 'package:bmi_test/modules/old_app/result_module.dart';
 // import 'package:bmi_test/test.dart';
 // import 'package:device_info_plus/device_info_plus.dart';
@@ -13,6 +14,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 // import 'package:battery_plus/battery_plus.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:uuid/uuid.dart';
@@ -21,6 +23,7 @@ import 'package:uuid/uuid.dart';
 import 'controller/cubit.dart';
 import 'shared/theme/theme.dart';
 import 'shared/translations/codegen_loader.g.dart';
+
 // import 'package:network_info_plus/network_info_plus.dart';
 // import 'package:location/location.dart';
 
@@ -128,6 +131,7 @@ Future<void> main() async {
 
   var uuid = Uuid();
   var userNameId = uuid.v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
+  print(userNameId.toString);
 
   runApp(
     EasyLocalization(

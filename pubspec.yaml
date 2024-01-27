@@ -60,7 +60,7 @@ dependencies:
   path: ^1.8.0
   # to collection the data to help the analysis
   battery_plus: ^5.0.2
-  network_info_plus: ^4.1.0
+#  network_info_plus: ^4.1.0
   device_info_plus: ^9.1.1
   location: ^5.0.0
   # to selected image to profile this is [future feature]

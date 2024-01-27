@@ -17,10 +17,10 @@ class HomeLayout extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           body: 
-          // context.read<BmiMainCubit>().userNotCompleted == false
-              // ? 
+          context.read<BmiMainCubit>().userNotCompleted == false
+              ?
               const GenderUser()
-              // : ResultScreen(),
+              : ResultScreen(),
         );
       },
     );

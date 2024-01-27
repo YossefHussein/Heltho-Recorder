@@ -9,6 +9,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -35,7 +36,6 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
- 
   late BannerAd _bannerAd;
   var _isBannerAdReady = false;
 
@@ -88,7 +88,6 @@ class _ResultScreenState extends State<ResultScreen> {
 //         ));
 //   }
 
-
 //   void _showInterstitialAd() {
 //   if (_interstitialAd == null) {
 //     print('Warning: attempt to show interstitial before loaded.');
@@ -134,6 +133,18 @@ class _ResultScreenState extends State<ResultScreen> {
           appBar: AppBar(
             title: const Text('Result'),
             centerTitle: true,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(
+                    context,
+                    genderUserScreenRoute,
+                  );
+                  context.read<BmiMainCubit>().deleteLocalAuth();
+                },
+                icon: const FaIcon(FontAwesomeIcons.deleteLeft),
+              )
+            ],
             leading: IconButton(
               tooltip: "repeat the Test",
               icon: const FaIcon(FontAwesomeIcons.repeat),
@@ -142,11 +153,13 @@ class _ResultScreenState extends State<ResultScreen> {
                 context.read<BmiMainCubit>().deleteLocalAuth();
                 context.read<BmiMainCubit>().changeLocalAuth();
                 // Navigator.pushReplacementNamed(context, heightScreenRoute);
-                Navigator.pushReplacementNamed(context, heightScreenRoute);
+                Navigator.pushReplacementNamed(
+                  context,
+                  heightScreenRoute,
+                );
               },
             ),
           ),
-
           body: Center(
             child: SingleChildScrollView(
               child: Padding(
@@ -199,11 +212,13 @@ class _ResultScreenState extends State<ResultScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        //
                       ],
                     ),
                     const SizedBox(
                       height: pSizeBox,
                     ),
+                    // image BMI
                     GestureDetector(
                       onDoubleTap: () async {},
                       child: Image.asset(
