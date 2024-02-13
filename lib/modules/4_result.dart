@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -23,9 +21,9 @@ class ResultScreen extends StatefulWidget {
   /// TODO: replace this test ad unit with your own ad unit
   final String adUnitId = Platform.isAndroid
       // Use this ad unit on Android...
-      ? 'ca-app-pub-3940256099942544/6300978111'
+      ? 'ca-app-pub-3816989531658757~4034758944'
       // ... or this one on iOS.
-      : 'ca-app-pub-3940256099942544/2934735716';
+      : 'ca-app-pub-3816989531658757~7664066083';
   ResultScreen({
     super.key,
     // this.adSize = AdSize.banner,
@@ -36,90 +34,13 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  late BannerAd _bannerAd;
-  var _isBannerAdReady = false;
-
-  /// Loads a banner ad.
-  // void _loadAd() {
-  //   _bannerAd = BannerAd(
-  //     adUnitId: widget.adUnitId,
-  //     request: AdRequest(),
-  //     // there default value in google mobile ad
-  //     size: ,
-  //     listener: BannerAdListener(
-  //       // Called when an ad is successfully received.
-  //       onAdLoaded: (_) {
-  //         setState(() {
-  //           _isBannerAdReady = true;
-  //         });
-  //       },
-  //       onAdFailedToLoad: (ad, err) {
-  //         _isBannerAdReady = false;
-  //         ad.dispose();
-  //       },
-  //     ),
-  //   );
-
-  //   // Start loading.
-  //   _bannerAd.load();
-  // }
-
-//   InterstitialAd? _interstitialAd;
-
-//   void _createInterstitialAd() {
-//     InterstitialAd.load(
-//         adUnitId: AdHelper.interstitialAdUnitId,
-//         request: request,
-//         adLoadCallback: InterstitialAdLoadCallback(
-//           onAdLoaded: (InterstitialAd ad) {
-//             print('$ad loaded');
-//             _interstitialAd = ad;
-//             _numInterstitialLoadAttempts = 0;
-//             _interstitialAd!.setImmersiveMode(true);
-//           },
-//           onAdFailedToLoad: (LoadAdError error) {
-//             print('InterstitialAd failed to load: $error.');
-//             _numInterstitialLoadAttempts += 1;
-//             _interstitialAd = null;
-//             if (_numInterstitialLoadAttempts < maxFailedLoadAttempts) {
-//               _createInterstitialAd();
-//             }
-//           },
-//         ));
-//   }
-
-//   void _showInterstitialAd() {
-//   if (_interstitialAd == null) {
-//     print('Warning: attempt to show interstitial before loaded.');
-//     return;
-//   }
-//   _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
-//     onAdShowedFullScreenContent: (InterstitialAd ad) =>
-//         print('ad onAdShowedFullScreenContent.'),
-//     onAdDismissedFullScreenContent: (InterstitialAd ad) {
-//       print('$ad onAdDismissedFullScreenContent.');
-//       ad.dispose();
-//       _createInterstitialAd();
-//     },
-//     onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-//       print('$ad onAdFailedToShowFullScreenContent: $error');
-//       ad.dispose();
-//       _createInterstitialAd();
-//     },
-//   );
-//   _interstitialAd!.show();
-//   _interstitialAd = null;
-// }
-
   @override
   void initState() {
     super.initState();
-    // _loadAd();
   }
 
   @override
   void dispose() {
-    _bannerAd.dispose();
     super.dispose();
   }
 
@@ -143,7 +64,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   context.read<BmiMainCubit>().deleteLocalAuth();
                 },
                 icon: const FaIcon(FontAwesomeIcons.deleteLeft),
-              )
+              ),
             ],
             leading: IconButton(
               tooltip: "repeat the Test",
@@ -220,9 +141,17 @@ class _ResultScreenState extends State<ResultScreen> {
                     ),
                     // image BMI
                     GestureDetector(
-                      onDoubleTap: () async {},
+                      onTap: () async {
+                        final Uri _url = Uri.parse(
+                          'https://ourworldindata.org/obesity#',
+                        );
+                        if (!await launchUrl(_url,
+                            mode: LaunchMode.externalApplication)) {
+                          throw Exception('Could not launch $_url');
+                        }
+                      },
                       child: Image.asset(
-                        'assets/images/BMI_chart.png',
+                        'assets/images/share-of-deaths-obesity.png',
                       ),
                     ),
                     GestureDetector(
@@ -243,19 +172,6 @@ class _ResultScreenState extends State<ResultScreen> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    // if (_isBannerAdReady)
-                    //   Align(
-                    //     alignment: Alignment.bottomCenter,
-                    //     child: Container(
-                    //       width: _bannerAd.size.width.toDouble(),
-                    //       height: _bannerAd.size.height.toDouble(),
-                    //       child: _bannerAd == null
-                    //           // Nothing to render yet.
-                    //           ? SizedBox()
-                    //           // The actual ad.
-                    //           : AdWidget(ad: _bannerAd),
-                    //     ),
-                    //   )
                   ],
                 ),
               ),

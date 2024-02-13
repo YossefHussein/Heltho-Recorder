@@ -9,9 +9,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lottie/lottie.dart';
-// import 'package:just_audio/just_audio.dart';
 
 import '../shared/theme/theme.dart';
 import '../shared/translations/locale_keys.dart';
@@ -49,12 +47,14 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: CustomScrollView(
+          body: 
+          CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
               SliverFillRemaining(
                 hasScrollBody: false,
-                child: Center(
+                child:
+                 Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -240,6 +240,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
+              
               )
             ],
           ),

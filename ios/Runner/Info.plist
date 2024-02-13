@@ -53,8 +53,8 @@
        <key>CFBundleExecutable</key>
        <string>$(EXECUTABLE_NAME)</string>
 
-       <key>GADApplicationIdentifier</key>
-        <string>ca-app-pub-3940256099942544~1458002511</string>
-
+        <key>GADApplicationIdentifier</key>
+		<!-- App Ads ID -->
+    <string>ca-app-pub-3816989531658757~7664066083</string>
 </dict>
 </plist>

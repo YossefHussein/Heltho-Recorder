@@ -10,17 +10,17 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // get and set data by these methods
     context.read<BmiMainCubit>().noUserCompletedTest();
     context.read<BmiMainCubit>().yseUserCompletedTest();
     return BlocConsumer<BmiMainCubit, BmiStates>(
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: 
-          context.read<BmiMainCubit>().userNotCompleted == false
-              ?
-              const GenderUser()
-              : ResultScreen(),
+          body: // is complete test get the test if not that give result scree
+              context.read<BmiMainCubit>().userNotCompleted == false
+                  ? const GenderUser()
+                  : ResultScreen(),
         );
       },
     );

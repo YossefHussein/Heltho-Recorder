@@ -32,20 +32,19 @@ class _ConfettiScreenState extends State<ConfettiScreen>
   final _random = Random();
 
   late AnimationController _confetti;
-  late final _player = AudioPlayer(); // Create a player
+
+  // final player = AudioPlayer(); // Create a player
 
   @override
   void initState() {
     super.initState();
     _confetti = AnimationController(vsync: this);
-    _player;
   }
 
   @override
   void dispose() {
     _confetti.dispose();
     super.dispose();
-    _player;
   }
 
   @override
@@ -61,11 +60,8 @@ class _ConfettiScreenState extends State<ConfettiScreen>
               ..duration = composition.duration
               ..forward().whenComplete(
                 () async {
-                  // final duration = await _player.setUrl(
-                  //   // Load a URL
-                  //   'https://foo.com/bar.mp3',
-                  // ); // Schemes: (https: | file: | asset: )
-                  // _player.play();
+                  // final duration = await player.setUrl(// Load a URL
+                  //     'https://github.com/YossefHussein/bmi_test/blob/f854b0bb228e32507026229e8aeb266336291731/assets/audio/piano_click.mp3');
                   Navigator.pushReplacementNamed(context, widget.targetScreen!);
                 },
               );

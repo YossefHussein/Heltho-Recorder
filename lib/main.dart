@@ -14,12 +14,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 // import 'package:battery_plus/battery_plus.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:uuid/uuid.dart';
 
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'controller/cubit.dart';
 import 'shared/theme/theme.dart';
 import 'shared/translations/codegen_loader.g.dart';
@@ -31,11 +31,13 @@ Future<void> main() async {
   // you should use this with adding async to main
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  MobileAds.instance.initialize();
+  MobileAds.instance.initialize(); 
+
+
+  BmiMainCubit.initDatabase();
 
   /// wifi information
   // final info = NetworkInfo();
-
   // // final wifiName = await info.getWifiName(); // "FooNetwork"
   // // print('Running (WIFI) on ${wifiName}');
   // // final wifiBSSID = await info.getWifiBSSID(); // 11:22:33:44:55:66

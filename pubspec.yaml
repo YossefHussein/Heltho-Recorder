@@ -61,8 +61,8 @@ dependencies:
   # to collection the data to help the analysis
   battery_plus: ^5.0.2
 #  network_info_plus: ^4.1.0
-  device_info_plus: ^9.1.1
-  location: ^5.0.0
+  # device_info_plus: ^9.1.1
+  # location: ^5.0.0
   # to selected image to profile this is [future feature]
 #  image_picker: ^1.0.7
   # save small things
@@ -77,6 +77,7 @@ dependencies:
   # stacked: ^2.2.8
   # to make user ID
   uuid: ^4.3.3
+  # adding ads
   google_mobile_ads: ^4.0.0
 
   
@@ -105,7 +106,7 @@ flutter:
   assets:
     - assets/translations/
     - assets/images/
-    # - assets/audio/piano_click.mp3
+    - assets/audio/piano_click.mp3
     - assets/animations/
     - assets/animations/confetti/
 

@@ -82,7 +82,7 @@ class _HeightScreenState extends State<HeightScreen> {
                                 .heightValue
                                 .toDouble(),
                             max: 220,
-                            min: 34.5,
+                            min: 34,
                             inactiveColor: pColor,
                             activeColor: pColor,
                             label: context.read<BmiMainCubit>()

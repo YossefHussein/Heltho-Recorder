@@ -40,6 +40,7 @@ class BmiMainCubit extends Cubit<BmiStates> {
     ageValue++;
     emit(AddingToAge());
   }
+
   // less to age
   void lessToAge() {
     ageValue--;
@@ -54,6 +55,7 @@ class BmiMainCubit extends Cubit<BmiStates> {
     weightValue++;
     emit(AddingToWeight());
   }
+
   // less to weight
   void lessToWeight() {
     weightValue.round();
@@ -70,7 +72,8 @@ class BmiMainCubit extends Cubit<BmiStates> {
   // Obtain shared preferences.
   late final SharedPreferences prefs;
 
-  // this variable to check on user if completed test or not for if user completed see the result
+  // this variable to check on user if completed 
+  // test or not for if user completed see the result
   bool userNotCompleted = true;
 
   /// this to save if user complete test
@@ -82,6 +85,7 @@ class BmiMainCubit extends Cubit<BmiStates> {
     emit(NoUserCompletedTest());
   }
 
+  // this to get the user data
   void yseUserCompletedTest() async {
     prefs = await SharedPreferences.getInstance();
     // Save an boolean value to 'repeat' key.
@@ -113,13 +117,17 @@ class BmiMainCubit extends Cubit<BmiStates> {
     return _database!;
   }
 
-  Future<Database> initDatabase() async {
-    String path = join(await getDatabasesPath(), 'user_database.db');
+  static Future<Database> initDatabase() async {
+    String path = join(
+      await getDatabasesPath(),
+      'user_database.db',
+    );
     return await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
-        await db.execute('''
+        await db.execute(
+          '''
           CREATE TABLE $tableName(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             gender bool,
@@ -128,7 +136,8 @@ class BmiMainCubit extends Cubit<BmiStates> {
             age INTEGER,
             bmi REAL
           )
-        ''');
+        ''',
+        );
       },
     );
   }
