@@ -16,7 +16,7 @@ class BmiMainCubit extends Cubit<BmiStates> {
   // this value to use in selected what is gender of user
   bool? isMale;
 
-  selctedUserGender(bool? genderUser) {
+  selectedUserGender(bool? genderUser) {
     if (genderUser == false) {
       isMale = false;
     } else {
@@ -34,7 +34,7 @@ class BmiMainCubit extends Cubit<BmiStates> {
   }
 
   // value of age
-  int ageValue = 20;
+  int ageValue = 70;
   // adding to age
   void addingToAge() {
     ageValue++;
@@ -67,43 +67,6 @@ class BmiMainCubit extends Cubit<BmiStates> {
     // height = this.heightValue;
     // weight = this.weightValue;
     return weightValue / pow(heightValue / 100, 2);
-  }
-
-  // Obtain shared preferences.
-  late final SharedPreferences prefs;
-
-  // this variable to check on user if completed 
-  // test or not for if user completed see the result
-  bool userNotCompleted = true;
-
-  /// this to save if user complete test
-  /// and this function is set key
-  void noUserCompletedTest() async {
-    prefs = await SharedPreferences.getInstance();
-    // Save an boolean value to 'repeat' key.
-    await prefs.setBool('userNotCompleted', userNotCompleted);
-    emit(NoUserCompletedTest());
-  }
-
-  // this to get the user data
-  void yseUserCompletedTest() async {
-    prefs = await SharedPreferences.getInstance();
-    // Save an boolean value to 'repeat' key.
-    await prefs.getBool('userNotCompleted');
-    emit(YseUserCompletedTest());
-  }
-
-  // this if user exits mean used and he wanted to do the test agin change the
-  void changeLocalAuth() {
-    userNotCompleted = !userNotCompleted;
-    emit(ChangeLocalAuth());
-  }
-
-  void deleteLocalAuth() async {
-    userNotCompleted = !userNotCompleted;
-    await prefs.remove('userNotCompleted');
-    noUserCompletedTest();
-    emit(DeleteLocalAuth());
   }
 
   /// local database of application
@@ -154,5 +117,14 @@ class BmiMainCubit extends Cubit<BmiStates> {
   Future<List<Map<String, dynamic>>> getUserData() async {
     Database db = await database;
     return await db.query(tableName);
+  }
+
+  TextEditingController ageController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+
+  seeAgeValue() {
+    int ageValue = this.ageValue;
+    ageValue = int.tryParse(ageController.text) ?? 0;
+    return ageValue;
   }
 }

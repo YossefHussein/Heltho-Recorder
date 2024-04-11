@@ -1,4 +1,3 @@
-
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
@@ -22,7 +21,6 @@ class GenderUser extends StatefulWidget {
 }
 
 class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
-
   // this to controller on animation
   late AnimationController _controllerFemale;
   late AnimationController _controllerMale;
@@ -47,14 +45,12 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: 
-          CustomScrollView(
+          body: CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
               SliverFillRemaining(
-                hasScrollBody: false,
-                child:
-                 Center(
+                hasScrollBody: true,
+                child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,7 +105,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                               child: GestureDetector(
                                 onTap: () {
                                   BmiMainCubit.get(context)
-                                      .selctedUserGender(false);
+                                      .selectedUserGender(false);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -149,7 +145,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                               child: GestureDetector(
                                 onTap: () async {
                                   BmiMainCubit.get(context)
-                                      .selctedUserGender(true);
+                                      .selectedUserGender(true);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -240,7 +236,6 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-              
               )
             ],
           ),

@@ -1,29 +1,28 @@
 import 'dart:io';
 
 import 'package:bmi_test/controller/cubit.dart';
+import 'package:bmi_test/controller/shared_cubit/shared_cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/shared/routes/main_routes.dart';
 import 'package:bmi_test/shared/theme/theme.dart';
 import 'package:bmi_test/shared/translations/locale_keys.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../shared/ads/ads_helper.dart';
 
 class ResultScreen extends StatefulWidget {
   /// The requested size of the banner. Defaults to [AdSize.banner].
-  // final AdSize? adSize;
+  /// final AdSize? adSize;
 
   /// The AdMob ad unit to show.
   ///
-  /// TODO: replace this test ad unit with your own ad unit
-  final String adUnitId = Platform.isAndroid
-      // Use this ad unit on Android...
-      ? 'ca-app-pub-3816989531658757~4034758944'
-      // ... or this one on iOS.
-      : 'ca-app-pub-3816989531658757~7664066083';
   ResultScreen({
     super.key,
     // this.adSize = AdSize.banner,
@@ -34,14 +33,23 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  @override
-  void initState() {
-    super.initState();
+  // for make banner
+  BannerAd? _banner;
+
+  // this method to adding setting
+  void _createBannerAd() {
+    _banner = BannerAd(
+      size: AdSize.fullBanner,
+      adUnitId: AdHelper.bannerAdUnitId,
+      listener: AdHelper.bannerListener,
+      request: const AdRequest(),
+    )..load();
   }
 
   @override
-  void dispose() {
-    super.dispose();
+  void initState() {
+    super.initState();
+    _createBannerAd();
   }
 
   @override
@@ -54,25 +62,13 @@ class _ResultScreenState extends State<ResultScreen> {
           appBar: AppBar(
             title: const Text('Result'),
             centerTitle: true,
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(
-                    context,
-                    genderUserScreenRoute,
-                  );
-                  context.read<BmiMainCubit>().deleteLocalAuth();
-                },
-                icon: const FaIcon(FontAwesomeIcons.deleteLeft),
-              ),
-            ],
             leading: IconButton(
               tooltip: "repeat the Test",
               icon: const FaIcon(FontAwesomeIcons.repeat),
-              onPressed: () {
+              onPressed: () async {
                 // _showInterstitialAd();
-                context.read<BmiMainCubit>().deleteLocalAuth();
-                context.read<BmiMainCubit>().changeLocalAuth();
+                Shared.deleteLocalAuth(key: 'test');
+                // context.read<SharedCubit>().changeLocalAuth();
                 // Navigator.pushReplacementNamed(context, heightScreenRoute);
                 Navigator.pushReplacementNamed(
                   context,
@@ -80,6 +76,18 @@ class _ResultScreenState extends State<ResultScreen> {
                 );
               },
             ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(
+                    context,
+                    genderUserScreenRoute,
+                  );
+                  Shared.deleteLocalAuth(key: 'test');
+                },
+                icon: const FaIcon(FontAwesomeIcons.deleteLeft),
+              ),
+            ],
           ),
           body: Center(
             child: SingleChildScrollView(
@@ -177,6 +185,13 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
             ),
           ),
+          bottomNavigationBar: _banner == null
+              ? Container()
+              : Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  height: 52,
+                  child: AdWidget(ad: _banner!),
+                ),
         );
       },
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 /*
-   p from primary.
-   s from secondary
+p from primary.
+s from secondary
 */
 
 /// these are main colors of my application

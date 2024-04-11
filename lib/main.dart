@@ -1,3 +1,4 @@
+import 'package:bmi_test/controller/shared_cubit/shared_cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/layout/home_layout.dart';
 import 'package:bmi_test/modules/1_gender_user.dart';
@@ -31,8 +32,7 @@ Future<void> main() async {
   // you should use this with adding async to main
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  MobileAds.instance.initialize(); 
-
+  MobileAds.instance.initialize();
 
   BmiMainCubit.initDatabase();
 
@@ -135,6 +135,9 @@ Future<void> main() async {
   var userNameId = uuid.v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
   print(userNameId.toString);
 
+  Shared.inti();
+  Shared.getData(key: 'test');
+
   runApp(
     EasyLocalization(
       path: 'assets/translations',
@@ -159,8 +162,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => BmiMainCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BmiMainCubit>(create: (context) => BmiMainCubit()),
+        // BlocProvider<SharedCubit>(create: (context) => SharedCubit()),
+      ],
       child: BlocConsumer<BmiMainCubit, BmiStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -190,12 +196,14 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             // default screen
-            initialRoute: homeLayoutRoute,
+            initialRoute:  Shared.userCompletedTest == true
+              ? resultScreenRoute
+              : homeLayoutRoute,
             routes: {
               homeLayoutRoute: (context) => const HomeLayout(),
               genderUserScreenRoute: (context) => const GenderUser(),
               heightScreenRoute: (context) => const HeightScreen(),
-              ageAndWeightScreenRoute: (context) => const AgeAndWeightScreen(),
+              ageAndWeightScreenRoute: (context) => AgeAndWeightScreen(),
               confettiScreenRoute: (context) => ConfettiScreen(),
               resultScreenRoute: (context) => ResultScreen(),
               // testingScreenRoute: (context) => const TestingScreen()
