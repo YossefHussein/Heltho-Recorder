@@ -6,7 +6,6 @@ import 'package:bmi_test/shared/theme/theme.dart';
 import 'package:bmi_test/shared/translations/locale_keys.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HeightScreen extends StatefulWidget {
@@ -65,6 +64,7 @@ class _HeightScreenState extends State<HeightScreen> {
                                       CrossAxisAlignment.baseline,
                                   textBaseline: TextBaseline.alphabetic,
                                   children: [
+                                    // the height of user
                                     Text(
                                       '${BmiMainCubit.get(context).heightValue}',
                                       style: TextStyle(

@@ -1,8 +1,10 @@
 /// this file for make routing
-/// those varibale is path of screen
+/// those variable is path of screen
 
 // main screen
 const String homeLayoutRoute = '/';
+// introduction for app
+const String onBoardingScreen = './onBoardingScreen';
 // this is testing screen
 const String genderUserScreenRoute = '/genderUserScreen';
 const String heightScreenRoute = '/heightScreen';

@@ -1,4 +1,3 @@
-import 'package:bmi_test/controller/shared_cubit/shared_cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/layout/home_layout.dart';
 import 'package:bmi_test/modules/1_gender_user.dart';
@@ -11,6 +10,7 @@ import 'package:bmi_test/modules/confetti_screen.dart';
 // import 'package:bmi_test/test.dart';
 // import 'package:device_info_plus/device_info_plus.dart';
 import 'package:bmi_test/shared/routes/main_routes.dart';
+import 'package:bmi_test/shared/shared_cubit/shared_prefs.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +22,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:uuid/uuid.dart';
 
 import 'controller/cubit.dart';
+import 'modules/0_onboarding.dart';
 import 'shared/theme/theme.dart';
 import 'shared/translations/codegen_loader.g.dart';
 
@@ -131,7 +132,7 @@ Future<void> main() async {
 //   var dataUserUsingInfo = ["timestamp: $dataUserUsedOfTimeStamp" , "date: $dataUserUsedOfHour / $dataUserUsedOfDay / $dataUserUsedOfMonth / $dataUserUsedOfYear " , "WeekDay: $dataUserUsedOfWeekDay " " UserfTimeZoneName: $dataUserUsedOfTimeZoneName | $dataUserUsedOfTimeZoneName | $dataUserUsedOfTimeZoneOffset"];
 //  print(dataUserUsingInfo);
 
-  var uuid = Uuid();
+  var uuid = const Uuid();
   var userNameId = uuid.v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
   print(userNameId.toString);
 
@@ -165,7 +166,6 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<BmiMainCubit>(create: (context) => BmiMainCubit()),
-        // BlocProvider<SharedCubit>(create: (context) => SharedCubit()),
       ],
       child: BlocConsumer<BmiMainCubit, BmiStates>(
         listener: (context, state) {},
@@ -196,14 +196,15 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             // default screen
-            initialRoute:  Shared.userCompletedTest == true
-              ? resultScreenRoute
-              : homeLayoutRoute,
+            initialRoute: Shared.userCompletedTest == false
+                ? onBoardingScreen
+                : homeLayoutRoute,
             routes: {
+              onBoardingScreen: (context) => const OnBoarding(),
               homeLayoutRoute: (context) => const HomeLayout(),
               genderUserScreenRoute: (context) => const GenderUser(),
               heightScreenRoute: (context) => const HeightScreen(),
-              ageAndWeightScreenRoute: (context) => AgeAndWeightScreen(),
+              ageAndWeightScreenRoute: (context) => const AgeAndWeightScreen(),
               confettiScreenRoute: (context) => ConfettiScreen(),
               resultScreenRoute: (context) => ResultScreen(),
               // testingScreenRoute: (context) => const TestingScreen()

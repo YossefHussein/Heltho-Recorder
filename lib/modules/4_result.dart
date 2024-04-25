@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:bmi_test/controller/cubit.dart';
-import 'package:bmi_test/controller/shared_cubit/shared_cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/shared/routes/main_routes.dart';
+import 'package:bmi_test/shared/shared_cubit/shared_prefs.dart';
 import 'package:bmi_test/shared/theme/theme.dart';
 import 'package:bmi_test/shared/translations/locale_keys.dart';
 import 'package:easy_localization/easy_localization.dart';

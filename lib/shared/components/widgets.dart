@@ -28,3 +28,9 @@ PreferredSizeWidget appBarWidget({
       elevation: 0.0,
       backgroundColor: pColor,
     );
+
+void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => widget),
+      (route) => false,
+    );
