@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Shared {
-  // Obtain shared preferences.
+  // create object shared preferences.
   static late SharedPreferences prefs;
 
   // this variable to check on user if completed
