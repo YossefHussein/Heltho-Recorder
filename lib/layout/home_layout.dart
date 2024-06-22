@@ -2,9 +2,10 @@ import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/modules/1_gender_user.dart';
 import 'package:bmi_test/modules/4_result.dart';
-import 'package:bmi_test/shared/shared_cubit/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../shared/shared_prefs/shared_prefs.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({Key? key}) : super(key: key);
@@ -16,9 +17,22 @@ class HomeLayout extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: Shared.userCompletedTest == true
-              ? ResultScreen()
-              : const GenderUser(),
+          body: context
+              .read<BmiMainCubit>()
+              .screnApp[context.read<BmiMainCubit>().currentScreen],
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.white,
+            elevation: 1,
+            selectedItemColor: Colors.redAccent,
+            unselectedItemColor: Colors.black,
+            items: context.read<BmiMainCubit>().bottomItem,
+            onTap: (int indexScreen) {
+              context
+                  .read<BmiMainCubit>()
+                  .changeBottomNavBarScreen(indexScreen);
+            },
+            currentIndex: context.read<BmiMainCubit>().currentScreen,
+          ),
         );
       },
     );

@@ -15,3 +15,5 @@ class LessToWeight extends BmiStates {}
 class AddingToWeight extends BmiStates {}
 
 class SeeAgeValue extends BmiStates{}
+
+class ChangeBottomNavBarScreen extends BmiStates{}

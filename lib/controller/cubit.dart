@@ -1,8 +1,11 @@
 import 'dart:math';
 
 import 'package:bmi_test/controller/states.dart';
+import 'package:bmi_test/modules/4_result.dart';
+import 'package:bmi_test/modules/support_me.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
@@ -12,6 +15,31 @@ class BmiMainCubit extends Cubit<BmiStates> {
 
   // give me the methods and the variale and etc
   static BmiMainCubit get(BuildContext context) => BlocProvider.of(context);
+
+  var currentScreen = 0;
+  List<Widget> screnApp = [
+    ResultScreen(),
+    SupportMeScreen(),
+  ];
+  List<BottomNavigationBarItem> bottomItem = const [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home_filled),
+      backgroundColor: Colors.black,
+      label: 'Business',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(
+        Bootstrap.heart_fill,
+        color: Colors.redAccent,
+      ),
+      label: 'Thanks',
+    ),
+  ];
+
+  void changeBottomNavBarScreen(value) {
+    currentScreen = value;
+    emit(ChangeBottomNavBarScreen());
+  }
 
   // this value to use in selected what is gender of user
   bool? isMale;
@@ -34,7 +62,8 @@ class BmiMainCubit extends Cubit<BmiStates> {
   }
 
   // value of age
-  int ageValue = 70;
+  int ageValue = 20;
+
   // adding to age
   void addingToAge() {
     ageValue++;
@@ -49,6 +78,7 @@ class BmiMainCubit extends Cubit<BmiStates> {
 
   // value of weight
   int weightValue = 70;
+
   // adding to weight
   void addingToWeight() {
     weightValue.round();

@@ -1,11 +1,10 @@
 // ad_helper.dart
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdHelper {
-  static String get bannerAdUnitId {
+  static String? get bannerAdUnitId {
     if (Platform.isAndroid) {
       return 'ca-app-pub-3816989531658757/9318730399';
     } else if (Platform.isIOS) {
@@ -25,7 +24,7 @@ class AdHelper {
     }
   }
 
-  static String get rewardedAdUnitId {
+  static String? get rewardedAdUnitId {
     if (Platform.isAndroid) {
       return 'ca-app-pub-3816989531658757/5678088033';
     } else if (Platform.isIOS) {

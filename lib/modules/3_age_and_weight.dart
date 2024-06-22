@@ -2,12 +2,13 @@ import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
 import 'package:bmi_test/shared/routes/main_routes.dart';
-import 'package:bmi_test/shared/shared_cubit/shared_prefs.dart';
 import 'package:bmi_test/shared/theme/theme.dart';
 import 'package:bmi_test/shared/translations/locale_keys.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../shared/shared_prefs/shared_prefs.dart';
 
 class AgeAndWeightScreen extends StatelessWidget {
   const AgeAndWeightScreen({super.key});

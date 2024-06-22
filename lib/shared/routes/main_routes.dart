@@ -4,12 +4,13 @@
 // main screen
 const String homeLayoutRoute = '/';
 // introduction for app
-const String onBoardingScreen = './onBoardingScreen';
+const String onBoardingScreenRoute = './onBoardingScreenRoute';
 // this is testing screen
-const String genderUserScreenRoute = '/genderUserScreen';
+const String genderUserScreenRoute = '/genderUserScreenRoute';
 const String heightScreenRoute = '/heightScreen';
 const String ageAndWeightScreenRoute = '/ageAndWeightScreen';
 const String resultScreenRoute = '/resultScreen';
 // this screen for animation between screen
 const String confettiScreenRoute = '/confettiScreenRoute';
+const String supportMeScreenRoute = '/supportMeScreenRoute';
 const String testingScreenRoute = '/testingScreenRoute';

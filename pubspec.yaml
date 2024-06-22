@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+4
 
 environment:
-  sdk: ^3.3.0
+  sdk: ^3.1.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -46,7 +46,7 @@ dependencies:
   # for zooming on image
   # photo_view: ^0.14.0
   # to open link
-  url_launcher: ^6.2.3
+  url_launcher: ^6.3.0
   # google_mobile_ads: ^4.0.0
   fl_chart: ^0.66.0
   #  adding some sound
@@ -68,12 +68,11 @@ dependencies:
   # save small things
   shared_preferences: ^2.2.2
   # font and icon
-  font_awesome_flutter: ^10.6.0
+  font_awesome_flutter: ^10.7.0
   # http: ^0.13.4
   # imagedownloader: ^0.31.0
   # logger: ^1.1.0
   # permissionhandler: ^8.3.0
-  # shareplus: ^3.0.4
   # stacked: ^2.2.8
   # to make user ID
   uuid: ^4.3.3
@@ -83,6 +82,10 @@ dependencies:
   introduction_screen: ^3.1.14
   # getwidget: ^4.0.0
   smooth_page_indicator: ^1.1.0
+  share_plus: ^7.1.0
+  icons_plus: ^5.0.0
+  button_animations: ^2.0.0+3
+  
 
 
 dev_dependencies:

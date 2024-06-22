@@ -5,12 +5,13 @@ import 'package:bmi_test/modules/2_height.dart';
 import 'package:bmi_test/modules/3_age_and_weight.dart';
 import 'package:bmi_test/modules/4_result.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
+import 'package:bmi_test/modules/support_me.dart';
 
 // import 'package:bmi_test/modules/old_app/result_module.dart';
 // import 'package:bmi_test/test.dart';
 // import 'package:device_info_plus/device_info_plus.dart';
 import 'package:bmi_test/shared/routes/main_routes.dart';
-import 'package:bmi_test/shared/shared_cubit/shared_prefs.dart';
+import 'package:bmi_test/shared/shared_prefs/shared_prefs.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,7 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
   MobileAds.instance.initialize();
 
-  BmiMainCubit.initDatabase();
+  // BmiMainCubit.initDatabase();
 
   /// wifi information
   // final info = NetworkInfo();
@@ -132,10 +133,10 @@ Future<void> main() async {
 //   var dataUserUsingInfo = ["timestamp: $dataUserUsedOfTimeStamp" , "date: $dataUserUsedOfHour / $dataUserUsedOfDay / $dataUserUsedOfMonth / $dataUserUsedOfYear " , "WeekDay: $dataUserUsedOfWeekDay " " UserfTimeZoneName: $dataUserUsedOfTimeZoneName | $dataUserUsedOfTimeZoneName | $dataUserUsedOfTimeZoneOffset"];
 //  print(dataUserUsingInfo);
 
-  var uuid = const Uuid();
-  var userNameId = uuid.v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
-  print(userNameId.toString);
-
+  // var uuid = const Uuid();
+  // var userNameId = uuid.v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
+  // print(userNameId.toString);
+  //
   Shared.inti();
   Shared.getData(key: 'test');
 
@@ -174,6 +175,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             // theme of app
             theme: ThemeData(
+              buttonTheme: ButtonThemeData(),
               appBarTheme: AppBarTheme(color: pColor),
               scaffoldBackgroundColor: pColor,
               // add main colors to app
@@ -196,17 +198,16 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             // default screen
-            initialRoute: Shared.userCompletedTest == false
-                ? onBoardingScreen
-                : homeLayoutRoute,
+            initialRoute: homeLayoutRoute,
             routes: {
-              onBoardingScreen: (context) => const OnBoarding(),
               homeLayoutRoute: (context) => const HomeLayout(),
+              onBoardingScreenRoute: (context) => const OnBoarding(),
               genderUserScreenRoute: (context) => const GenderUser(),
               heightScreenRoute: (context) => const HeightScreen(),
               ageAndWeightScreenRoute: (context) => const AgeAndWeightScreen(),
               confettiScreenRoute: (context) => ConfettiScreen(),
               resultScreenRoute: (context) => ResultScreen(),
+              supportMeScreenRoute: (context) => SupportMeScreen(),
               // testingScreenRoute: (context) => const TestingScreen()
             },
           );

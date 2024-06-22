@@ -34,3 +34,7 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => widget),
       (route) => false,
     );
+
+Widget pSizeBoxHeight20() => SizedBox(height: 20);
+
+Widget pSizeBoxWidth10() => const SizedBox(width: 10);

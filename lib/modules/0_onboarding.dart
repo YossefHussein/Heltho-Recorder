@@ -86,78 +86,76 @@ class Controlling extends State<OnBoarding> {
                 GenderUser(),
               );
             },
-            child: Text('SKIP'),
+            child: Text(
+              'SKIP',
+              style: TextStyle(color: Colors.black),
+            ),
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(30),
-        child: SingleChildScrollView(
-          child: Column(
+      body: Column(
+        children: [
+          PageView.builder(
+            controller: boardController,
+            itemBuilder: (context, index) => onBoardingItem(
+              model: boarding[index],
+            ),
+            // this method when change doing this
+            // onPageChanged: (index) {
+            //   if (index == boarding.length - 1) {
+            //     // if true go to [ShopLoginScreen]
+            //     // because when to be true and user click of [FloatingActionButton] Widget active code inside [FloatingActionButton]
+            //     // and going to ShopLoginScreen
+            //     setState(() {
+            //       isLast = true;
+            //     });
+            //   } else {
+            //     // if false mean go to next page
+            //     setState(() {
+            //       isLast = false;
+            //     });
+            //   }
+            // },
+            // adding the length of the [boarding] list
+            itemCount: boarding.length,
+          ),
+          Row(
             children: [
-              PageView.builder(
+              // this to adding style to indicator of onboarding screen
+              SmoothPageIndicator(
                 controller: boardController,
-                itemBuilder: (context, index) => onBoardingItem(
-                  model: boarding[index],
+                count: boarding.length,
+                // [ExpandingDotsEffect] is styling for [smooth page indicator]
+                effect: ExpandingDotsEffect(
+                  dotColor: Colors.grey,
+                  activeDotColor: sColor,
+                  dotHeight: 10,
+                  expansionFactor: 4,
+                  dotWidth: 8,
+                  spacing: 5,
                 ),
-                // this method when change doing this
-                onPageChanged: (index) {
-                  if (index == boarding.length - 1) {
+              ),
+              // Spacer(),
+              FloatingActionButton(
+                onPressed: () {
+                  if (isLast) {
                     // if true go to [ShopLoginScreen]
-                    // because when to be true and user click of [FloatingActionButton] Widget active code inside [FloatingActionButton]
-                    // and going to ShopLoginScreen
-                    setState(() {
-                      isLast = true;
-                    });
+                    // navigateAndFinish(context, GenderUser());
                   } else {
-                    // if false mean go to next page
-                    setState(() {
-                      isLast = false;
-                    });
+                    // [boardController] next page this method to move next page inside page view
+                    // boardController.nextPage(
+                    //   // duration is 850 milliseconds
+                    //   duration: Duration(milliseconds: 850),
+                    //   // [fastLinearToSlowEaseIn] is style of movement
+                    //   curve: Curves.fastLinearToSlowEaseIn,
+                    // );
                   }
                 },
-                // adding the length of the [boarding] list
-                itemCount: boarding.length,
-              ),
-              Row(
-                children: [
-                  // this to adding style to indicator of onboarding screen
-                  SmoothPageIndicator(
-                    controller: boardController,
-                    count: boarding.length,
-                    // [ExpandingDotsEffect] is styling for [smooth page indicator]
-                    effect: ExpandingDotsEffect(
-                      dotColor: Colors.grey,
-                      activeDotColor: sColor,
-                      dotHeight: 10,
-                      expansionFactor: 4,
-                      dotWidth: 8,
-                      spacing: 5,
-                    ),
-                  ),
-                  Spacer(),
-                  FloatingActionButton(
-                    onPressed: () {
-                      if (isLast) {
-                        // if true go to [ShopLoginScreen]
-                        navigateAndFinish(context, GenderUser());
-                      } else {
-                        // [boardController] next page this method to move next page inside page view
-                        boardController.nextPage(
-                          // duration is 850 milliseconds
-                          duration: Duration(milliseconds: 850),
-                          // [fastLinearToSlowEaseIn] is style of movement
-                          curve: Curves.fastLinearToSlowEaseIn,
-                        );
-                      }
-                    },
-                    child: Icon(Icons.arrow_forward_ios_outlined),
-                  )
-                ],
+                child: Icon(Icons.arrow_forward_ios_outlined),
               )
             ],
-          ),
-        ),
+          )
+        ],
       ),
     );
   }
@@ -171,9 +169,9 @@ class Controlling extends State<OnBoarding> {
       children: [
         // this to passing for lottie
         Lottie.asset(model.lottieImage),
-        Spacer(
-          flex: 1,
-        ),
+        // Spacer(
+        //   flex: 1,
+        // ),
         Text(
           // this to passing for title
           model.title,
@@ -193,9 +191,9 @@ class Controlling extends State<OnBoarding> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Spacer(
-          flex: 2,
-        ),
+        // Spacer(
+        //   flex: 2,
+        // ),
       ],
     );
   }
