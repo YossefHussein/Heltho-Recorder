@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+4
 
 environment:
-  sdk: ^3.1.0
+  sdk: ^3.4.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -47,7 +47,6 @@ dependencies:
   # photo_view: ^0.14.0
   # to open link
   url_launcher: ^6.3.0
-  # google_mobile_ads: ^4.0.0
   fl_chart: ^0.66.0
   #  adding some sound
   just_audio: ^0.9.36
@@ -92,7 +91,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0 # Contains a set of recommended lints for Flutter code
   # buildrunner: ^2.1.7
   # stacked_generator: ^0.5.7
 
