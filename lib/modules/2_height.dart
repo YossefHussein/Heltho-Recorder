@@ -7,6 +7,9 @@ import 'package:bmi_test/shared/translations/locale_keys.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import '../shared/ads/ads_helper.dart';
 
 class HeightScreen extends StatefulWidget {
   const HeightScreen({super.key});
@@ -16,6 +19,24 @@ class HeightScreen extends StatefulWidget {
 }
 
 class _HeightScreenState extends State<HeightScreen> {
+  // for make banner
+  BannerAd? _banner;
+
+  // this method to adding setting
+  void _createBannerAd() {
+    _banner = BannerAd(
+      size: AdSize.fullBanner,
+      adUnitId: AdHelper.bannerAdUnitId!,
+      listener: AdHelper.bannerListener,
+      request: const AdRequest(),
+    )..load();
+  }
+
+  @override
+  void initState() {
+    _createBannerAd();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BmiMainCubit, BmiStates>(
@@ -23,6 +44,7 @@ class _HeightScreenState extends State<HeightScreen> {
       builder: (context, state) {
         return Scaffold(
           body: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
             slivers: [
               SliverFillRemaining(
                 hasScrollBody: true,
@@ -141,6 +163,12 @@ class _HeightScreenState extends State<HeightScreen> {
               ),
             ],
           ),
+          bottomNavigationBar: _banner == null
+              ? Container()
+              : Container(
+                  height: 52,
+                  child: AdWidget(ad: _banner!),
+                ),
         );
       },
     );

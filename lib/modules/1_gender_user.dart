@@ -9,9 +9,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../shared/theme/theme.dart';
 import '../shared/translations/locale_keys.dart';
+import '../shared/ads/ads_helper.dart';
 
 class GenderUser extends StatefulWidget {
   const GenderUser({super.key});
@@ -25,9 +27,23 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
   late AnimationController _controllerFemale;
   late AnimationController _controllerMale;
 
+  // for make banner
+  BannerAd? _banner;
+
+  // this method to adding setting
+  void _createBannerAd() {
+    _banner = BannerAd(
+      size: AdSize.fullBanner,
+      adUnitId: AdHelper.bannerAdUnitId!,
+      listener: AdHelper.bannerListener,
+      request: const AdRequest(),
+    )..load();
+  }
+
   @override
   void initState() {
     super.initState();
+    _createBannerAd();
     _controllerFemale = AnimationController(vsync: this);
     _controllerMale = AnimationController(vsync: this);
   }
@@ -46,7 +62,6 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
       builder: (context, state) {
         return Scaffold(
           body: CustomScrollView(
-            physics: const BouncingScrollPhysics(),
             slivers: [
               SliverFillRemaining(
                 hasScrollBody: true,
@@ -238,6 +253,12 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                 ),
               )
             ],
+          ),
+          bottomNavigationBar: _banner == null
+              ? Container()
+              : Container(
+            height: 52,
+            child: AdWidget(ad: _banner!),
           ),
         );
       },

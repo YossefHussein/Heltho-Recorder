@@ -2,7 +2,7 @@
 /// those variable is path of screen
 
 // main screen
-const String homeLayoutRoute = '/';
+const String homeLayoutScreenRoute = '/';
 // introduction for app
 const String onBoardingScreenRoute = './onBoardingScreenRoute';
 // this is testing screen

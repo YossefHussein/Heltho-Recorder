@@ -5,7 +5,8 @@ import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 
 class ConfettiScreen extends StatefulWidget {
-  String? targetScreen;
+  final targetScreen;
+
   ConfettiScreen({super.key, this.targetScreen});
 
   @override

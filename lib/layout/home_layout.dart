@@ -1,14 +1,38 @@
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
-import 'package:bmi_test/modules/1_gender_user.dart';
-import 'package:bmi_test/modules/4_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../shared/shared_prefs/shared_prefs.dart';
+import '../shared/ads/ads_helper.dart';
+import '../shared/theme/theme.dart';
 
-class HomeLayout extends StatelessWidget {
-  const HomeLayout({Key? key}) : super(key: key);
+class HomeLayout extends StatefulWidget {
+  HomeLayout({Key? key}) : super(key: key);
+
+  @override
+  State<HomeLayout> createState() => _HomeLayoutState();
+}
+
+class _HomeLayoutState extends State<HomeLayout> {
+  // for make banner
+  BannerAd? _banner;
+
+  // this method to adding setting
+  void _createBannerAd() {
+    _banner = BannerAd(
+      size: AdSize.fullBanner,
+      adUnitId: AdHelper.bannerAdUnitId!,
+      listener: AdHelper.bannerListener,
+      request: const AdRequest(),
+    )..load();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _createBannerAd();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +43,32 @@ class HomeLayout extends StatelessWidget {
         return Scaffold(
           body: context
               .read<BmiMainCubit>()
-              .screnApp[context.read<BmiMainCubit>().currentScreen],
-          bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Colors.white,
-            elevation: 1,
-            selectedItemColor: Colors.redAccent,
-            unselectedItemColor: Colors.black,
-            items: context.read<BmiMainCubit>().bottomItem,
-            onTap: (int indexScreen) {
-              context
-                  .read<BmiMainCubit>()
-                  .changeBottomNavBarScreen(indexScreen);
-            },
-            currentIndex: context.read<BmiMainCubit>().currentScreen,
+              .screenApp[context.read<BmiMainCubit>().currentScreen],
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              _banner == null
+                  ? Container()
+                  : Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      height: 52,
+                      child: AdWidget(ad: _banner!),
+                    ),
+              BottomNavigationBar(
+                backgroundColor: Colors.white,
+                elevation: 1,
+                selectedItemColor: sColor,
+                unselectedItemColor: Colors.black,
+                items: context.read<BmiMainCubit>().bottomItem,
+                onTap: (int indexScreen) {
+                  context
+                      .read<BmiMainCubit>()
+                      .changeBottomNavBarScreen(indexScreen);
+                },
+                currentIndex: context.read<BmiMainCubit>().currentScreen,
+              ),
+            ],
           ),
         );
       },

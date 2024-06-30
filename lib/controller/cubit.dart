@@ -17,26 +17,26 @@ class BmiMainCubit extends Cubit<BmiStates> {
   static BmiMainCubit get(BuildContext context) => BlocProvider.of(context);
 
   var currentScreen = 0;
-  List<Widget> screnApp = [
+
+  List<Widget> screenApp = [
     ResultScreen(),
     SupportMeScreen(),
   ];
+
   List<BottomNavigationBarItem> bottomItem = const [
     BottomNavigationBarItem(
       icon: Icon(Icons.home_filled),
-      backgroundColor: Colors.black,
       label: 'Business',
     ),
     BottomNavigationBarItem(
       icon: Icon(
         Bootstrap.heart_fill,
-        color: Colors.redAccent,
       ),
       label: 'Thanks',
     ),
   ];
 
-  void changeBottomNavBarScreen(value) {
+  void changeBottomNavBarScreen(int value) {
     currentScreen = value;
     emit(ChangeBottomNavBarScreen());
   }

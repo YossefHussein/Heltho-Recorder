@@ -35,7 +35,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   MobileAds.instance.initialize();
-
+  await SharedPrefs.inti();
+  await SharedPrefs.getData(key: 'test');
   // BmiMainCubit.initDatabase();
 
   /// wifi information
@@ -136,9 +137,8 @@ Future<void> main() async {
   // var uuid = const Uuid();
   // var userNameId = uuid.v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
   // print(userNameId.toString);
-  //
-  Shared.inti();
-  Shared.getData(key: 'test');
+
+
 
   runApp(
     EasyLocalization(
@@ -198,13 +198,13 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             // default screen
-            initialRoute: homeLayoutRoute,
+            initialRoute: SharedPrefs.userCompletedTest == false ? genderUserScreenRoute : homeLayoutScreenRoute,
             routes: {
-              homeLayoutRoute: (context) => const HomeLayout(),
-              onBoardingScreenRoute: (context) => const OnBoarding(),
-              genderUserScreenRoute: (context) => const GenderUser(),
-              heightScreenRoute: (context) => const HeightScreen(),
-              ageAndWeightScreenRoute: (context) => const AgeAndWeightScreen(),
+              homeLayoutScreenRoute: (context) => HomeLayout(),
+              onBoardingScreenRoute: (context) => OnBoarding(),
+              genderUserScreenRoute: (context) => GenderUser(),
+              heightScreenRoute: (context) => HeightScreen(),
+              ageAndWeightScreenRoute: (context) => AgeAndWeightScreen(),
               confettiScreenRoute: (context) => ConfettiScreen(),
               resultScreenRoute: (context) => ResultScreen(),
               supportMeScreenRoute: (context) => SupportMeScreen(),

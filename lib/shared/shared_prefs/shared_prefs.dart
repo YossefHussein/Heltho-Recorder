@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Shared {
+class SharedPrefs {
   // create object shared preferences.
   static late SharedPreferences prefs;
 
@@ -19,7 +19,6 @@ class Shared {
     required String key,
     required dynamic value,
   }) async {
-    // save an boolean value to 'repeat' key.
     if (value is bool) {
       await prefs.setBool(
         key,

@@ -7,17 +7,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../shared/ads/ads_helper.dart';
 import '../shared/shared_prefs/shared_prefs.dart';
 
 class ResultScreen extends StatefulWidget {
   ResultScreen({
     super.key,
-    // this.adSize = AdSize.banner,
   });
 
   @override
@@ -25,58 +21,6 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  // for make banner
-  BannerAd? _banner;
-
-  // this method to adding setting
-  void _createBannerAd() {
-    _banner = BannerAd(
-      size: AdSize.fullBanner,
-      adUnitId: AdHelper.bannerAdUnitId!,
-      listener: AdHelper.bannerListener,
-      request: const AdRequest(),
-    )..load();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _createBannerAd();
-  }
-
-  RewardedAd? _rewardedAd;
-  int _rewardedScore = 0;
-
-  void _createRewardedAd() {
-    RewardedAd.load(
-      adUnitId: AdHelper.rewardedAdUnitId!,
-      request: const AdRequest(),
-      rewardedAdLoadCallback: RewardedAdLoadCallback(
-          onAdLoaded: (ad) => setState(() => _rewardedAd = ad),
-          onAdFailedToLoad: (error) => setState(() {
-                _rewardedAd = null;
-              })),
-    );
-  }
-
-  void _showRewardedAd() {
-    if (_rewardedAd != null) {
-      _rewardedAd!.fullScreenContentCallback =
-          FullScreenContentCallback(onAdDismissedFullScreenContent: (ad) {
-        ad.dispose();
-        _createRewardedAd();
-      }, onAdFailedToShowFullScreenContent: (ad, error) {
-        ad.dispose();
-        _createRewardedAd();
-      });
-      _rewardedAd!.show(
-        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) =>
-            _rewardedScore++,
-      );
-    }
-    _rewardedAd = null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BmiMainCubit, BmiStates>(
@@ -85,13 +29,13 @@ class _ResultScreenState extends State<ResultScreen> {
         return Scaffold(
           // disable the code
           appBar: AppBar(
-            title: Text('Result Score $_rewardedScore'),
+            title: Text('Result'),
             centerTitle: true,
             leading: IconButton(
               tooltip: "repeat the Test",
               icon: const FaIcon(FontAwesomeIcons.repeat),
               onPressed: () async {
-                Shared.deleteLocalAuth(key: 'test');
+                SharedPrefs.deleteLocalAuth(key: 'test');
                 // context.read<SharedCubit>().changeLocalAuth();
                 Navigator.pushReplacementNamed(
                   context,
@@ -106,7 +50,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     context,
                     genderUserScreenRoute,
                   );
-                  Shared.deleteLocalAuth(key: 'test');
+                  SharedPrefs.deleteLocalAuth(key: 'test');
                 },
                 icon: const FaIcon(FontAwesomeIcons.deleteLeft),
               ),
@@ -183,7 +127,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           }
                         },
                         child: Image.asset(
-                          'assets/images/share-of-deaths-obesity.png',
+                          'assets/images/Body_Mass_Index.jpg',
                         ),
                       ),
                       GestureDetector(
@@ -204,19 +148,11 @@ class _ResultScreenState extends State<ResultScreen> {
                           textAlign: TextAlign.center,
                         ),
                       ),
-
                     ],
                   ),
                 ),
               ),
             ),
-          ),
-          bottomNavigationBar: _banner == null
-              ? Container()
-              : Container(
-            margin: const EdgeInsets.only(bottom: 12),
-            height: 52,
-            child: AdWidget(ad: _banner!),
           ),
         );
       },
