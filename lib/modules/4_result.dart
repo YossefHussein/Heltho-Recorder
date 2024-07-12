@@ -70,7 +70,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           // gender user
                           Text(
