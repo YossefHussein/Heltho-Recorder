@@ -1,19 +1,20 @@
-import 'package:bmi_test/controller/cubit.dart';
-import 'package:bmi_test/controller/states.dart';
-import 'package:bmi_test/modules/confetti_screen.dart';
-import 'package:bmi_test/shared/routes/main_routes.dart';
+import 'package:bmi_test/shared/network/local/cache_helper.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../controller/cubit.dart';
+import '../controller/states.dart';
+import '../shared/routes/main_routes.dart';
 import '../shared/theme/theme.dart';
 import '../shared/translations/locale_keys.dart';
 import '../shared/ads/ads_helper.dart';
+import 'confetti_screen.dart';
 
 class GenderUser extends StatefulWidget {
   const GenderUser({super.key});
@@ -101,7 +102,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          '${LocaleKeys.whatIsYourGender.tr()} \n (${BmiMainCubit.get(context).isMale == null ? "${LocaleKeys.msgToUser.tr()}" : "${BmiMainCubit.get(context).isMale == false ? "${LocaleKeys.woman.tr()}" : " ${LocaleKeys.man.tr()}"}"})',
+                          '${LocaleKeys.whatIsYourGender.tr()} \n (${BmiMainCubit.get(context).isMale == null ? LocaleKeys.msgToUser.tr() : BmiMainCubit.get(context).isMale == false ? LocaleKeys.woman.tr() : " ${LocaleKeys.man.tr()}"})',
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
@@ -137,9 +138,10 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        const FaIcon(
+                                        FaIcon(
                                           FontAwesomeIcons.female,
                                           size: pIconSize,
+                                          color: pColorIcon,
                                         ),
                                         const SizedBox(height: pSizeBox),
                                         Text(
@@ -177,9 +179,10 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        const FaIcon(
+                                        FaIcon(
                                           FontAwesomeIcons.person,
                                           size: pIconSize,
+                                          color: pColorIcon,
                                         ),
                                         const SizedBox(height: pSizeBox),
                                         Text(
@@ -197,68 +200,64 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                         ),
                       ),
                       const Spacer(),
-                      // to give my (BMI)
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        color: pColorResultButton,
-                        child: TextButton(
-                          child: Center(
-                            child: Text(
-                              "${LocaleKeys.whatAfterThat.tr().toUpperCase()}",
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            if (context.read<BmiMainCubit>().isMale == true) {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ConfettiScreen(
-                                    // this line to move to difference screen when call this screen
-                                    targetScreen: heightScreenRoute,
-                                  ),
-                                ),
-                              );
-                            } else if (context.read<BmiMainCubit>().isMale ==
-                                false) {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ConfettiScreen(
-                                    // this line to move to difference screen when call this screen
-                                    targetScreen: heightScreenRoute,
-                                  ),
-                                ),
-                              );
-                            } else if (context.read<BmiMainCubit>().isMale ==
-                                null) {
-                              Fluttertoast.showToast(
-                                msg: "Selected gender",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 3,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0,
-                              );
-                            }
-                          },
-                        ),
-                      ),
                     ],
                   ),
                 ),
               )
             ],
           ),
-          bottomNavigationBar: _banner == null
-              ? Container()
-              : Container(
-            height: 52,
-            child: AdWidget(ad: _banner!),
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ConditionalBuilder(
+                condition: _banner == null,
+                builder: (context) => Container(),
+                fallback: (context) => Container(
+                  // margin: const EdgeInsets.only(bottom: 12),
+                  height: 52,
+                  child: AdWidget(ad: _banner!),
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                color: pColorResultButton,
+                child: TextButton(
+                  child: Center(
+                    child: Text(
+                      LocaleKeys.whatAfterThat.tr().toUpperCase(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (context.read<BmiMainCubit>().isMale == true || false) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ConfettiScreen(
+                            // this line to move to difference screen when call this screen
+                            targetScreen: heightScreenRoute,
+                          ),
+                        ),
+                      );
+                    } else if (context.read<BmiMainCubit>().isMale == null) {
+                      Fluttertoast.showToast(
+                        msg: "Selected gender",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
           ),
         );
       },

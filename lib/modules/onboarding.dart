@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:bmi_test/modules/1_gender_user.dart';
-import 'package:bmi_test/shared/routes/main_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../shared/components/widgets.dart';
 import '../shared/theme/theme.dart';
+import '1_gender_user.dart';
 
 // this model to help me to adding the image and title
 // and body for onboarding [onBoardingItem] method
@@ -75,7 +74,7 @@ class Controlling extends State<OnBoarding> {
         actions: [
           TextButton(
             style: ButtonStyle(
-              textStyle: MaterialStateProperty.all(
+              textStyle: WidgetStateProperty.all(
                 TextStyle(color: Colors.black),
               ),
             ),

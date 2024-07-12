@@ -1,18 +1,20 @@
-import 'package:bmi_test/controller/cubit.dart';
-import 'package:bmi_test/controller/states.dart';
-import 'package:bmi_test/shared/routes/main_routes.dart';
-import 'package:bmi_test/shared/theme/theme.dart';
-import 'package:bmi_test/shared/translations/locale_keys.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../shared/shared_prefs/shared_prefs.dart';
+import '../controller/cubit.dart';
+import '../controller/states.dart';
+import '../shared/components/widgets.dart';
+import '../shared/network/local/cache_helper.dart';
+import '../shared/routes/main_routes.dart';
+import '../shared/theme/theme.dart';
+import '../shared/translations/locale_keys.dart';
 
 class ResultScreen extends StatefulWidget {
-  ResultScreen({
+  const ResultScreen({
     super.key,
   });
 
@@ -29,14 +31,12 @@ class _ResultScreenState extends State<ResultScreen> {
         return Scaffold(
           // disable the code
           appBar: AppBar(
-            title: Text('Result'),
+            title: const Text('Result'),
             centerTitle: true,
             leading: IconButton(
               tooltip: "repeat the Test",
-              icon: const FaIcon(FontAwesomeIcons.repeat),
+              icon: const FaIcon(CupertinoIcons.repeat),
               onPressed: () async {
-                SharedPrefs.deleteLocalAuth(key: 'test');
-                // context.read<SharedCubit>().changeLocalAuth();
                 Navigator.pushReplacementNamed(
                   context,
                   heightScreenRoute,
@@ -46,13 +46,15 @@ class _ResultScreenState extends State<ResultScreen> {
             actions: [
               IconButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(
-                    context,
-                    genderUserScreenRoute,
-                  );
-                  SharedPrefs.deleteLocalAuth(key: 'test');
+                  // remove data
+                  CacheHelper.removeData(key: 'isUserCompleteTest').then((value) {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      genderUserScreenRoute,
+                    );
+                  });
                 },
-                icon: const FaIcon(FontAwesomeIcons.deleteLeft),
+                icon: const Icon(CupertinoIcons.delete),
               ),
             ],
           ),
@@ -64,6 +66,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      // data of user
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -112,32 +115,32 @@ class _ResultScreenState extends State<ResultScreen> {
                           //
                         ],
                       ),
-                      const SizedBox(
-                        height: pSizeBox,
-                      ),
+                      pSizeBoxWidth15(),
                       // image BMI
                       GestureDetector(
                         onTap: () async {
-                          final Uri _url = Uri.parse(
+                          final Uri url = Uri.parse(
                             'https://ourworldindata.org/obesity#',
                           );
-                          if (!await launchUrl(_url,
+                          if (!await launchUrl(url,
                               mode: LaunchMode.externalApplication)) {
-                            throw Exception('Could not launch $_url');
+                            throw Exception('Could not launch $url');
                           }
                         },
                         child: Image.asset(
                           'assets/images/Body_Mass_Index.jpg',
                         ),
                       ),
+                      // go to website of bmi test
+                      pSizeBoxWidth15(),
                       GestureDetector(
                         onTap: () async {
-                          final Uri _url = Uri.parse(
+                          final Uri url = Uri.parse(
                             'https://ourworldindata.org/obesity#',
                           );
-                          if (!await launchUrl(_url,
+                          if (!await launchUrl(url,
                               mode: LaunchMode.externalApplication)) {
-                            throw Exception('Could not launch $_url');
+                            throw Exception('Could not launch $url');
                           }
                         },
                         child: Text(

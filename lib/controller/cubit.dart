@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:path/path.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 class BmiMainCubit extends Cubit<BmiStates> {
@@ -19,20 +18,20 @@ class BmiMainCubit extends Cubit<BmiStates> {
   var currentScreen = 0;
 
   List<Widget> screenApp = [
-    ResultScreen(),
-    SupportMeScreen(),
+    const ResultScreen(),
+    const SupportMeScreen(),
   ];
 
   List<BottomNavigationBarItem> bottomItem = const [
     BottomNavigationBarItem(
       icon: Icon(Icons.home_filled),
-      label: 'Business',
+      label: 'Home',
     ),
     BottomNavigationBarItem(
       icon: Icon(
         Bootstrap.heart_fill,
       ),
-      label: 'Thanks',
+      label: 'Support',
     ),
   ];
 

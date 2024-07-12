@@ -1,5 +1,3 @@
-import 'package:bmi_test/controller/cubit.dart';
-import 'package:bmi_test/controller/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,10 +5,12 @@ import 'package:icons_plus/icons_plus.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
+import '../controller/cubit.dart';
+import '../controller/states.dart';
 import '../shared/components/widgets.dart';
 
 class SupportMeScreen extends StatelessWidget {
-  SupportMeScreen({Key? key}) : super(key: key);
+  const SupportMeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,8 @@ class SupportMeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Center(
-                child: const Text(
+              const Center(
+                child: Text(
                   'This is not should to do If You want support me \n You can do it from these app',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -35,32 +35,15 @@ class SupportMeScreen extends StatelessWidget {
               ),
               pSizeBoxHeight20(),
               /**
-               * support in paypal section
-               **/
-              GestureDetector(
-                onTap: () => openWebsite(
-                    'https://www.paypal.com/paypalme/my/settings/?flow=cmV0dXJuVXJsPS9teWFjY291bnQvcHJvZmlsZSZjYW5jZWxVcmw9L215YWNjb3VudC9wcm9maWxl'),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Brand(Brands.paypal),
-                    pSizeBoxWidth10(),
-                    const Text(
-                        'Support me with paypal \n User name: yousefhussein222')
-                  ],
-                ),
-              ),
-              pSizeBoxHeight20(),
-              /**
                * bay me a coffee section
                **/
               GestureDetector(
                 onTap: () =>
-                    openWebsite('https://buymeacoffee.com/victorsteelman'),
+                    _openWebsite('https://buymeacoffee.com/victorsteelman'),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
                     Image.asset(
                       'assets/images/bmc_logo_no_background.png',
@@ -68,7 +51,7 @@ class SupportMeScreen extends StatelessWidget {
                     ),
                     pSizeBoxWidth10(),
                     const Text(
-                        'Support me with buyMeACoffe \n User name: victorsteelman')
+                        'Support me with BuyMeACoffee \n User name: @victorsteelman')
                   ],
                 ),
               ),
@@ -77,32 +60,31 @@ class SupportMeScreen extends StatelessWidget {
                * twitter section
                */
               GestureDetector(
-                onTap: () => openWebsite('https://x.com/VictorSteelman'),
+                onTap: () => _openWebsite('https://x.com/VictorSteelman'),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
-                    const FaIcon(
-                      FontAwesomeIcons.xTwitter,
-                      color: Colors.black,
-                    ),
+                    Brand(Brands.twitterx),
                     pSizeBoxWidth10(),
                     const Text(
-                        'My twitter account \n User name: VictorSteelman')
+                        'My Twitter account \n User name: @VictorSteelman')
                   ],
                 ),
               ),
               pSizeBoxHeight20(),
               GestureDetector(
-                onTap: () => openWebsite('https://github.com/YossefHussein'),
+                onTap: () => _openWebsite('https://www.youtube.com/@VictorSteelman'),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  textBaseline: TextBaseline.alphabetic,
                   children: [
-                    const FaIcon(FontAwesomeIcons.github, color: Colors.black),
+                    Brand(Brands.youtube),
                     pSizeBoxWidth10(),
                     const Text(
-                        'My projects on github \n User name: YossefHussein')
+                        'My projects on YouTube \n User name: @VictorSteelman')
                   ],
                 ),
               ),
@@ -113,7 +95,7 @@ class SupportMeScreen extends StatelessWidget {
     );
   }
 
-  openWebsite(websiteUrlOpen) async {
+  _openWebsite(websiteUrlOpen) async {
     final Uri url = Uri.parse(websiteUrlOpen);
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');

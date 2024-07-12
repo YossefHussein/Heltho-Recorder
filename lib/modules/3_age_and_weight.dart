@@ -1,16 +1,18 @@
 import 'package:bmi_test/controller/cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
-import 'package:bmi_test/shared/routes/main_routes.dart';
-import 'package:bmi_test/shared/theme/theme.dart';
-import 'package:bmi_test/shared/translations/locale_keys.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../shared/ads/ads_helper.dart';
-import '../shared/shared_prefs/shared_prefs.dart';
+import '../shared/network/local/cache_helper.dart';
+import '../shared/routes/main_routes.dart';
+import '../shared/theme/theme.dart';
+import '../shared/translations/locale_keys.dart';
 
 class AgeAndWeightScreen extends StatefulWidget {
   const AgeAndWeightScreen({super.key});
@@ -190,57 +192,58 @@ class _AgeAndWeightScreenState extends State<AgeAndWeightScreen> {
                         ),
                       ),
                       const Spacer(),
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        color: pColorResultButton,
-                        child: TextButton(
-                          child: Center(
-                            child: Text(
-                              LocaleKeys.calculate.tr().toUpperCase(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              SharedPrefs.userCompletedTest = true;
-                            });
-                            SharedPrefs.setData(
-                              key: 'test',
-                              value: [
-                                SharedPrefs.userCompletedTest = true,
-                                context.read<BmiMainCubit>().isMale,
-                                context.read<BmiMainCubit>().ageValue,
-                                context.read<BmiMainCubit>().weightValue,
-                                context.read<BmiMainCubit>().isMale,
-                              ],
-                            ).then((value) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ConfettiScreen(
-                                    targetScreen: homeLayoutScreenRoute,
-                                  ),
-                                ),
-                              );
-                            });
-                          },
-                        ),
-                      ),
                     ],
                   ),
                 )
               ],
             ),
           ),
-          bottomNavigationBar: _banner == null
-              ? Container()
-              : Container(
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ConditionalBuilder(
+                condition: _banner == null,
+                builder: (context) => Container(),
+                fallback: (context) => Container(
+                  // margin: const EdgeInsets.only(bottom: 12),
                   height: 52,
                   child: AdWidget(ad: _banner!),
                 ),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                color: pColorResultButton,
+                child: TextButton(
+                  child: Center(
+                    child: Text(
+                      LocaleKeys.whatAfterThat.tr().toUpperCase(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    CacheHelper.saveData(key: 'isUserCompleteTest', value: true)
+                        .then(
+                      (value) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ConfettiScreen(
+                              // this line to move to difference screen when call this screen
+                              targetScreen: homeLayoutScreenRoute,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

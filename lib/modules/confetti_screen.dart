@@ -1,13 +1,11 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 
 class ConfettiScreen extends StatefulWidget {
   final targetScreen;
 
-  ConfettiScreen({super.key, this.targetScreen});
+  const ConfettiScreen({super.key, this.targetScreen});
 
   @override
   State<ConfettiScreen> createState() => _ConfettiScreenState();
@@ -54,6 +52,7 @@ class _ConfettiScreenState extends State<ConfettiScreen>
       backgroundColor: Colors.white,
       body: Center(
         child: Lottie.asset(
+          // select random animation from list
           animationList[_random.nextInt(animationList.length)],
           controller: _confetti,
           onLoaded: (composition) async {

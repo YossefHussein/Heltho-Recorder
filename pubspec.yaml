@@ -47,7 +47,7 @@ dependencies:
   # photo_view: ^0.14.0
   # to open link
   url_launcher: ^6.3.0
-  fl_chart: ^0.66.0
+  fl_chart: ^0.68.0
   #  adding some sound
   just_audio: ^0.9.36
   # this is for routing [future feature]
@@ -60,9 +60,9 @@ dependencies:
   # to collection the data to help the analysis
   battery_plus: ^5.0.2
 #  network_info_plus: ^4.1.0
-  # device_info_plus: ^9.1.1
-  # location: ^5.0.0
-  # to selected image to profile this is [future feature]
+#   device_info_plus: ^9.1.1
+#  location: ^5.0.0
+#   to selected image to profile this is [future feature]
 #  image_picker: ^1.0.7
   # save small things
   shared_preferences: ^2.2.2
@@ -85,7 +85,8 @@ dependencies:
   icons_plus: ^5.0.0
   button_animations: ^2.0.0+3
   curved_navigation_bar: ^1.0.6
-  
+  conditional_builder_null_safety: ^0.0.6
+
 
 
 dev_dependencies:
