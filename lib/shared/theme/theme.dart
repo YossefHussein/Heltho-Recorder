@@ -7,11 +7,11 @@ s from secondary
 
 /// these are main colors of my application
 // Color pColor = Color(0xFFFFF9F9);
-Color pColor = Color.fromARGB(255, 255, 255, 255);
-Color sColor =  Color(0xFFF44336);
+Color pColor = const Color.fromARGB(255, 255, 255, 255);
+Color sColor = const Color(0xFFF44336);
 Color pColorResultButton = const Color(0xFFF44336);
-Color pColorIcon = Color(0xFFFFFFFF);
-Color pColorButtonIcon = Color(0xFF000000);
+Color pColorIcon = const Color(0xFFFFFFFF);
+Color pColorButtonIcon = const Color(0xFF000000);
 
 Color pColorSelectedFemale = Colors.pink;
 Color pColorSelectedMale = Colors.blue;
@@ -31,6 +31,6 @@ const double pSmallFontSize = 15;
 
 /// colors of button and Item
 /// this is in old project used
-Color pColorText = Color(0xFF000000);
-Color pColorSliderInactive = Color(0xFF351D5B);
+Color pColorText = const Color(0xFF000000);
+Color pColorSliderInactive = const Color(0xFF351D5B);
 Color pColorButton = const Color(0xFF462777);

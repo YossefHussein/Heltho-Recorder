@@ -28,7 +28,7 @@ import '../../shared/theme/theme.dart';
 import '../../shared/translations/locale_keys.dart';
 
 class BmiModule extends StatefulWidget {
-  const BmiModule({Key? key}) : super(key: key);
+  const BmiModule({super.key});
 
   @override
   State<BmiModule> createState() => _BmiModuleState();

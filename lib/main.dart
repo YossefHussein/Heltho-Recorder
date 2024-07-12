@@ -7,36 +7,24 @@ import 'package:bmi_test/modules/4_result.dart';
 import 'package:bmi_test/modules/confetti_screen.dart';
 import 'package:bmi_test/modules/support_me.dart';
 
-// import 'package:bmi_test/modules/old_app/result_module.dart';
-// import 'package:bmi_test/test.dart';
-// import 'package:device_info_plus/device_info_plus.dart';
 import 'package:bmi_test/shared/routes/main_routes.dart';
-import 'package:bmi_test/shared/shared_prefs/shared_prefs.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-// import 'package:battery_plus/battery_plus.dart';
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:uuid/uuid.dart';
-
 import 'controller/cubit.dart';
-import 'modules/0_onboarding.dart';
+import 'modules/onboarding.dart';
+import 'shared/network/local/cache_helper.dart';
 import 'shared/theme/theme.dart';
 import 'shared/translations/codegen_loader.g.dart';
-
-// import 'package:network_info_plus/network_info_plus.dart';
-// import 'package:location/location.dart';
 
 Future<void> main() async {
   // you should use this with adding async to main
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  MobileAds.instance.initialize();
-  await SharedPrefs.inti();
-  await SharedPrefs.getData(key: 'test');
+  await MobileAds.instance.initialize();
+  await CacheHelper.inti();
   // BmiMainCubit.initDatabase();
 
   /// wifi information
@@ -138,7 +126,16 @@ Future<void> main() async {
   // var userNameId = uuid.v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
   // print(userNameId.toString);
 
+  var isCompleteTest = await CacheHelper.getData(key: 'isUserCompleteTest');
 
+  String startRoute;
+
+  // if onboarding if not equal null go to login screen
+  if (isCompleteTest != null) {
+    startRoute = homeLayoutScreenRoute;
+  } else {
+    startRoute = genderUserScreenRoute;
+  }
 
   runApp(
     EasyLocalization(
@@ -154,13 +151,17 @@ Future<void> main() async {
       // ignore: prefer_const_constructors
       assetLoader: CodegenLoader(),
       // ignore: prefer_const_constructors
-      child: MyApp(),
+      child: MyApp(
+        startRoute: startRoute,
+      ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  var startRoute;
+
+  MyApp({super.key, this.startRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +176,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             // theme of app
             theme: ThemeData(
-              buttonTheme: ButtonThemeData(),
+              buttonTheme: const ButtonThemeData(),
               appBarTheme: AppBarTheme(color: pColor),
               scaffoldBackgroundColor: pColor,
               // add main colors to app
@@ -188,26 +189,23 @@ class MyApp extends StatelessWidget {
                 bodyColor: pColorText,
                 displayColor: pColorText,
               ),
-              iconTheme: IconThemeData(
-                color: pColorIcon,
-              ),
               useMaterial3: true,
             ),
-            title: 'Health Recorder',
+            title: 'Heltho Recorder',
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             // default screen
-            initialRoute: SharedPrefs.userCompletedTest == false ? genderUserScreenRoute : homeLayoutScreenRoute,
+            initialRoute: startRoute,
             routes: {
-              homeLayoutScreenRoute: (context) => HomeLayout(),
-              onBoardingScreenRoute: (context) => OnBoarding(),
-              genderUserScreenRoute: (context) => GenderUser(),
-              heightScreenRoute: (context) => HeightScreen(),
-              ageAndWeightScreenRoute: (context) => AgeAndWeightScreen(),
-              confettiScreenRoute: (context) => ConfettiScreen(),
-              resultScreenRoute: (context) => ResultScreen(),
-              supportMeScreenRoute: (context) => SupportMeScreen(),
+              homeLayoutScreenRoute: (context) => const HomeLayout(),
+              onBoardingScreenRoute: (context) => const OnBoarding(),
+              genderUserScreenRoute: (context) => const GenderUser(),
+              heightScreenRoute: (context) => const HeightScreen(),
+              ageAndWeightScreenRoute: (context) => const AgeAndWeightScreen(),
+              confettiScreenRoute: (context) => const ConfettiScreen(),
+              resultScreenRoute: (context) => const ResultScreen(),
+              supportMeScreenRoute: (context) => const SupportMeScreen(),
               // testingScreenRoute: (context) => const TestingScreen()
             },
           );

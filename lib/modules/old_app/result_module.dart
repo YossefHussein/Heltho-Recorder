@@ -88,7 +88,7 @@ class ResultModule extends StatelessWidget {
                     const SizedBox(
                       height: pSizeBox,
                     ),
-                    Image(
+                    const Image(
                       image: AssetImage("assets/images/body_mass_index.jpg"),
                     ),
                   ],
