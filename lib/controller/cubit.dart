@@ -5,15 +5,18 @@ import 'package:bmi_test/modules/4_result.dart';
 import 'package:bmi_test/modules/support_me.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class BmiMainCubit extends Cubit<BmiStates> {
-  BmiMainCubit() : super(BmiMainInits());
+import '../shared/theme/theme.dart';
 
-  // give me the methods and the variale and etc
-  static BmiMainCubit get(BuildContext context) => BlocProvider.of(context);
+class AppCubit extends Cubit<AppStates> {
+  AppCubit() : super(AppInits());
+
+  // give me the methods and the variable and etc
+  static AppCubit get(BuildContext context) => BlocProvider.of(context);
 
   var currentScreen = 0;
 
@@ -22,16 +25,29 @@ class BmiMainCubit extends Cubit<BmiStates> {
     const SupportMeScreen(),
   ];
 
-  List<BottomNavigationBarItem> bottomItem = const [
-    BottomNavigationBarItem(
-      icon: Icon(Icons.home_filled),
-      label: 'Home',
+  // List<BottomNavigationBarItem> bottomItem = const [
+  //   BottomNavigationBarItem(
+  //     icon: Icon(Icons.home_filled),
+  //     label: 'Home',
+  //   ),
+  //   BottomNavigationBarItem(
+  //     icon: Icon(
+  //       Bootstrap.heart_fill,
+  //     ),
+  //     label: 'Support',
+  //   ),
+  // ];
+
+  List<GButton> bottomItem = [
+    GButton(
+      icon: Icons.home,
+      text: 'Home',
+      iconColor: Colors.black,
     ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Bootstrap.heart_fill,
-      ),
-      label: 'Support',
+    GButton(
+      icon: Bootstrap.heart_fill,
+      text: 'Support me',
+      iconColor: Colors.black,
     ),
   ];
 

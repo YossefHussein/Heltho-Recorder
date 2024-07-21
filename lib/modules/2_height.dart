@@ -42,7 +42,7 @@ class _HeightScreenState extends State<HeightScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BmiMainCubit, BmiStates>(
+    return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
@@ -91,7 +91,7 @@ class _HeightScreenState extends State<HeightScreen> {
                                   children: [
                                     // the height of user
                                     Text(
-                                      '${BmiMainCubit.get(context).heightValue}',
+                                      '${AppCubit.get(context).heightValue}',
                                       style: TextStyle(
                                         color: pColor,
                                         fontSize: pLargeFontSize,
@@ -109,7 +109,7 @@ class _HeightScreenState extends State<HeightScreen> {
                                   ],
                                 ),
                                 Slider(
-                                  value: BmiMainCubit.get(context)
+                                  value: AppCubit.get(context)
                                       .heightValue
                                       .toDouble(),
                                   max: 220,
@@ -117,12 +117,12 @@ class _HeightScreenState extends State<HeightScreen> {
                                   inactiveColor: pColor,
                                   activeColor: pColor,
                                   label: context
-                                      .read<BmiMainCubit>()
+                                      .read<AppCubit>()
                                       .heightValue
                                       .toInt()
                                       .toString(),
                                   onChanged: (double value) {
-                                    BmiMainCubit.get(context)
+                                    AppCubit.get(context)
                                         .changeSlider(value);
                                   },
                                 )

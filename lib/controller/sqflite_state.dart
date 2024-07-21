@@ -1,6 +1,16 @@
-part of 'sqflite_cubit.dart';
+ import 'package:bmi_test/controller/sqflite_cubit.dart';
 
-@immutable
-sealed class SqfliteState {}
+class SqfliteState {}
 
-final class SqfliteInitial extends SqfliteState {}
+ class SqfliteInitial extends SqfliteState {}
+
+
+class AppCreateDatabaseState extends SqfliteState {}
+
+class AppGetDatabaseState extends SqfliteState {}
+
+class AppInsertDatabaseState extends SqfliteState {}
+
+class AppUpdateDatabaseState extends SqfliteState {}
+
+class AppDeleteDatabaseState extends SqfliteState {}

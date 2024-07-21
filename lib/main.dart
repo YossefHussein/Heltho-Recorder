@@ -1,3 +1,4 @@
+import 'package:bmi_test/controller/sqflite_cubit.dart';
 import 'package:bmi_test/controller/states.dart';
 import 'package:bmi_test/layout/home_layout.dart';
 import 'package:bmi_test/modules/1_gender_user.dart';
@@ -13,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'controller/cubit.dart';
 import 'modules/onboarding.dart';
 import 'shared/network/local/cache_helper.dart';
@@ -26,6 +29,7 @@ Future<void> main() async {
   await MobileAds.instance.initialize();
   await CacheHelper.inti();
   // BmiMainCubit.initDatabase();
+  await Hive.initFlutter();
 
   /// wifi information
   // final info = NetworkInfo();
@@ -167,9 +171,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<BmiMainCubit>(create: (context) => BmiMainCubit()),
+        BlocProvider<AppCubit>(create: (context) => AppCubit()),
+        BlocProvider<SqfliteCubit>(create: (context) => SqfliteCubit()),
       ],
-      child: BlocConsumer<BmiMainCubit, BmiStates>(
+      child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
