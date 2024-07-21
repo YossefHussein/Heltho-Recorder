@@ -43,7 +43,7 @@ class _AgeAndWeightScreenState extends State<AgeAndWeightScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BmiMainCubit, BmiStates>(
+    return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
@@ -80,7 +80,7 @@ class _AgeAndWeightScreenState extends State<AgeAndWeightScreen> {
                                         ),
                                       ),
                                       Text(
-                                        '${context.read<BmiMainCubit>().ageValue}',
+                                        '${context.read<AppCubit>().ageValue}',
                                         style: TextStyle(
                                           color: pColor,
                                           fontSize: pLargeFontSize,
@@ -94,7 +94,7 @@ class _AgeAndWeightScreenState extends State<AgeAndWeightScreen> {
                                           FloatingActionButton(
                                             onPressed: () {
                                               context
-                                                  .read<BmiMainCubit>()
+                                                  .read<AppCubit>()
                                                   .lessToAge();
                                             },
                                             heroTag: 'ageValue less',
@@ -106,7 +106,7 @@ class _AgeAndWeightScreenState extends State<AgeAndWeightScreen> {
                                           FloatingActionButton(
                                             onPressed: () {
                                               context
-                                                  .read<BmiMainCubit>()
+                                                  .read<AppCubit>()
                                                   .addingToAge();
                                               // setState(() {
                                               //   ageValue++;
@@ -147,7 +147,7 @@ class _AgeAndWeightScreenState extends State<AgeAndWeightScreen> {
                                         ),
                                       ),
                                       Text(
-                                        '${context.read<BmiMainCubit>().weightValue}',
+                                        '${context.read<AppCubit>().weightValue}',
                                         style: TextStyle(
                                           color: pColor,
                                           fontSize: pLargeFontSize,
@@ -161,7 +161,7 @@ class _AgeAndWeightScreenState extends State<AgeAndWeightScreen> {
                                           FloatingActionButton(
                                             onPressed: () {
                                               context
-                                                  .read<BmiMainCubit>()
+                                                  .read<AppCubit>()
                                                   .lessToWeight();
                                             },
                                             heroTag: 'weightValue less',
@@ -173,7 +173,7 @@ class _AgeAndWeightScreenState extends State<AgeAndWeightScreen> {
                                           FloatingActionButton(
                                             onPressed: () {
                                               context
-                                                  .read<BmiMainCubit>()
+                                                  .read<AppCubit>()
                                                   .addingToWeight();
                                             },
                                             heroTag: 'weightValue add',

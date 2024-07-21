@@ -1,4 +1,3 @@
-import 'package:bmi_test/shared/network/local/cache_helper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 import '../controller/cubit.dart';
 import '../controller/states.dart';
@@ -58,7 +58,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BmiMainCubit, BmiStates>(
+    return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
@@ -72,10 +72,10 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Spacer(),
-                      BmiMainCubit.get(context).isMale == null
+                      AppCubit.get(context).isMale == null
                           ? Lottie.asset('assets/animations/pushups.json')
                           // see female icon if user is female
-                          : BmiMainCubit.get(context).isMale == false
+                          : AppCubit.get(context).isMale == false
                               ? Lottie.asset(
                                   'assets/animations/avatar_female.json',
                                   controller: _controllerFemale,
@@ -102,7 +102,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          '${LocaleKeys.whatIsYourGender.tr()} \n (${BmiMainCubit.get(context).isMale == null ? LocaleKeys.msgToUser.tr() : BmiMainCubit.get(context).isMale == false ? LocaleKeys.woman.tr() : " ${LocaleKeys.man.tr()}"})',
+                          '${LocaleKeys.whatIsYourGender.tr()} \n (${AppCubit.get(context).isMale == null ? LocaleKeys.msgToUser.tr() : AppCubit.get(context).isMale == false ? LocaleKeys.woman.tr() : " ${LocaleKeys.man.tr()}"})',
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
@@ -120,12 +120,12 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  BmiMainCubit.get(context)
+                                  AppCubit.get(context)
                                       .selectedUserGender(false);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: BmiMainCubit.get(context).isMale ==
+                                    color: AppCubit.get(context).isMale ==
                                             false
                                         ? pColorSelectedFemale
                                         : sColor,
@@ -161,13 +161,13 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () async {
-                                  BmiMainCubit.get(context)
+                                  AppCubit.get(context)
                                       .selectedUserGender(true);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color:
-                                        BmiMainCubit.get(context).isMale == true
+                                        AppCubit.get(context).isMale == true
                                             ? pColorSelectedMale
                                             : sColor,
                                     borderRadius:
@@ -233,7 +233,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () {
-                    if (context.read<BmiMainCubit>().isMale == true || false) {
+                    if (context.read<AppCubit>().isMale == true || false) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -243,7 +243,7 @@ class _GenderUserState extends State<GenderUser> with TickerProviderStateMixin {
                           ),
                         ),
                       );
-                    } else if (context.read<BmiMainCubit>().isMale == null) {
+                    } else if (context.read<AppCubit>().isMale == null) {
                       Fluttertoast.showToast(
                         msg: "Selected gender",
                         toastLength: Toast.LENGTH_SHORT,

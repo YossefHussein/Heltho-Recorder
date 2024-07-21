@@ -1,19 +1,19 @@
-abstract class BmiStates {}
+abstract class AppStates {}
 
-class BmiMainInits extends BmiStates {}
+class AppInits extends AppStates {}
 
-class SelectedUserGender extends BmiStates {}
+class SelectedUserGender extends AppStates {}
 
-class ChangeSilderValue extends BmiStates {}
+class ChangeSilderValue extends AppStates {}
 
-class AddingToAge extends BmiStates {}
+class AddingToAge extends AppStates {}
 
-class LessToAge extends BmiStates {}
+class LessToAge extends AppStates {}
 
-class LessToWeight extends BmiStates {}
+class LessToWeight extends AppStates {}
 
-class AddingToWeight extends BmiStates {}
+class AddingToWeight extends AppStates {}
 
-class SeeAgeValue extends BmiStates{}
+class SeeAgeValue extends AppStates{}
 
-class ChangeBottomNavBarScreen extends BmiStates{}
+class ChangeBottomNavBarScreen extends AppStates{}

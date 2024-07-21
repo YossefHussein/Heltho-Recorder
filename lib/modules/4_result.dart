@@ -25,7 +25,7 @@ class ResultScreen extends StatefulWidget {
 class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BmiMainCubit, BmiStates>(
+    return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
@@ -74,7 +74,7 @@ class _ResultScreenState extends State<ResultScreen> {
                         children: [
                           // gender user
                           Text(
-                            '${LocaleKeys.yourGender.tr()} : ${context.read<BmiMainCubit>().isMale == true ? LocaleKeys.man.tr() : LocaleKeys.woman.tr()}',
+                            '${LocaleKeys.yourGender.tr()} : ${context.read<AppCubit>().isMale == true ? LocaleKeys.man.tr() : LocaleKeys.woman.tr()}',
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           ),
                           // user height
                           Text(
-                            '${LocaleKeys.yourHeight.tr()} : ${context.read<BmiMainCubit>().heightValue}',
+                            '${LocaleKeys.yourHeight.tr()} : ${context.read<AppCubit>().heightValue}',
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           ),
                           // user weight
                           Text(
-                            '${LocaleKeys.yourWeight.tr()} : ${context.read<BmiMainCubit>().weightValue}',
+                            '${LocaleKeys.yourWeight.tr()} : ${context.read<AppCubit>().weightValue}',
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           ),
                           // age user
                           Text(
-                            '${LocaleKeys.yourAge.tr()} : ${context.read<BmiMainCubit>().ageValue}',
+                            '${LocaleKeys.yourAge.tr()} : ${context.read<AppCubit>().ageValue}',
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           ),
                           // bmi result of user
                           Text(
-                            '${LocaleKeys.bmiResult.tr()} : ${context.read<BmiMainCubit>().resultPrint().round()}',
+                            '${LocaleKeys.bmiResult.tr()} : ${context.read<AppCubit>().resultPrint().round()}',
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
